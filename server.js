@@ -1,6 +1,7 @@
 const https = require("https");
+const http = require("http");
 
-const API_KEY = "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";
+const API_KEY = process.env.ANTHROPIC_API_KEY;
 
 function handleRequest(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -14,8 +15,14 @@ function handleRequest(req, res) {
   }
 
   if (req.method !== "POST") {
-    res.writeHead(405);
-    res.end(JSON.stringify({ error: "Method not allowed" }));
+    res.writeHead(405, {"Content-Type":"application/json"});
+    res.end(JSON.stringify({error:"Method not allowed"}));
+    return;
+  }
+
+  if (!API_KEY) {
+    res.writeHead(500, {"Content-Type":"application/json"});
+    res.end(JSON.stringify({error:"API key not configured"}));
     return;
   }
 
@@ -38,14 +45,14 @@ function handleRequest(req, res) {
       let data = "";
       apiRes.on("data", function(chunk) { data += chunk; });
       apiRes.on("end", function() {
-        res.writeHead(apiRes.statusCode, { "Content-Type": "application/json" });
+        res.writeHead(apiRes.statusCode, {"Content-Type":"application/json"});
         res.end(data);
       });
     });
 
     apiReq.on("error", function(err) {
-      res.writeHead(500);
-      res.end(JSON.stringify({ error: err.message }));
+      res.writeHead(500, {"Content-Type":"application/json"});
+      res.end(JSON.stringify({error:err.message}));
     });
 
     apiReq.write(body);
@@ -54,6 +61,6 @@ function handleRequest(req, res) {
 }
 
 const PORT = process.env.PORT || 3000;
-require("http").createServer(handleRequest).listen(PORT, function() {
+http.createServer(handleRequest).listen(PORT, function() {
   console.log("CXC Proxy running on port " + PORT);
 });
