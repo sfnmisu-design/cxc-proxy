@@ -1102,14 +1102,8 @@ function switchToProfile() {
 
 // ── PAYPAL DONATE ────────────────────────────────────────────
 function openPayPal() {
-  // Opens PayPal donate page - replace YOUR_PAYPAL_EMAIL with your actual PayPal email
-  var paypalEmail = 'YOUR_PAYPAL_EMAIL@example.com';
-  var amount = '5.00';
-  var url = 'https://www.paypal.com/donate?business=' + encodeURIComponent(paypalEmail) +
-    '&amount=' + amount +
-    '&currency_code=USD' +
-    '&item_name=' + encodeURIComponent('CXC Study Hub - Support Students');
-  window.open(url, '_blank');
+  // PayPal.me link - works for all personal accounts
+  window.open('https://www.paypal.com/ncp/payment/V2D8XZVB6MQYN', '_blank');
 }
 
 // ── QUIZ HISTORY & PROGRESS TRACKING ─────────────────────────
@@ -1380,12 +1374,7 @@ function hidePaywall() {
 }
 
 function goToPayPal() {
-  var url = 'https://www.paypal.com/donate?business=' + encodeURIComponent(PAYPAL_EMAIL) +
-    '&amount=' + PAYPAL_AMOUNT +
-    '&currency_code=' + PAYPAL_CURRENCY +
-    '&item_name=' + encodeURIComponent('CXC Study Hub - Lifetime Access') + '&amount=10.99' +
-    '&return=' + encodeURIComponent(window.location.href + '?paid=1');
-  window.open(url, '_blank');
+  window.open('https://www.paypal.com/ncp/payment/V2D8XZVB6MQYN', '_blank');
   // Show instructions after opening PayPal
   setTimeout(function() {
     document.querySelector('.unlock-section p').textContent = 'After paying, check your email for your access code and enter it below:';
