@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CXC Study Hub</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:Arial,sans-serif;background:#f0f2f5;color:#1a1a2e;}
+nav{background:#1a1a2e;padding:8px 12px;display:flex;align-items:center;gap:4px;flex-wrap:wrap;position:sticky;top:0;z-index:99;}
+.logo{color:#00c896;font-weight:700;font-size:15px;margin-right:6px;}
+.nb{background:none;border:none;color:#aaa;padding:5px 8px;border-radius:6px;cursor:pointer;font-size:12px;}
+.nb.on{background:#00c896;color:#000;font-weight:700;}
+.hero{background:#1a1a2e;color:#fff;text-align:center;padding:22px 16px 18px;}
+.hero h1{font-size:21px;margin-bottom:5px;} .hero h1 span{color:#00c896;}
+.hero p{font-size:12px;color:#aaa;max-width:380px;margin:0 auto 12px;}
+.stats{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+.sn{font-size:18px;font-weight:700;color:#00c896;} .sl{font-size:11px;color:#aaa;}
+.pg{display:none;padding:12px;max-width:900px;margin:0 auto;} .pg.on{display:block;}
+.card{background:#fff;border-radius:10px;padding:14px;margin-bottom:12px;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.card2{background:#f8f9fa;border-radius:8px;padding:10px;margin-bottom:8px;border:1px solid #e0e0e0;}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(148px,1fr));gap:8px;margin-bottom:14px;}
+.sc{background:#fff;border-radius:10px;padding:11px;cursor:pointer;border:2px solid #e0e0e0;transition:border-color .15s;}
+.sc:hover{border-color:#00c896;}
+.si{width:32px;height:32px;border-radius:7px;background:#e8f8f3;color:#00c896;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;margin-bottom:7px;}
+.si.cp{background:#f3f0ff;color:#7c3aed;}
+.sn2{font-size:11px;font-weight:700;margin-bottom:2px;} .sd{font-size:10px;color:#666;line-height:1.4;}
+.tag{display:inline-block;padding:2px 7px;border-radius:99px;font-size:10px;font-weight:700;margin-top:5px;}
+.tg{background:#e8f8f3;color:#00c896;} .tp{background:#f3f0ff;color:#7c3aed;}
+.pill{background:#f0f2f5;border:1px solid #ddd;padding:3px 9px;border-radius:99px;font-size:11px;cursor:pointer;margin-right:4px;margin-bottom:4px;}
+.pill.on{background:#00c896;border-color:#00c896;color:#000;font-weight:700;}
+.cl{font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin:12px 0 7px;}
+.split{display:grid;grid-template-columns:185px 1fr;background:#fff;border-radius:10px;overflow:hidden;box-shadow:0 1px 4px rgba(0,0,0,0.08);}
+.sb{border-right:1px solid #e0e0e0;overflow-y:auto;max-height:500px;}
+.sbh{padding:6px 10px;font-size:10px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;background:#f8f9fa;border-bottom:1px solid #e0e0e0;}
+.sbi{display:flex;align-items:center;gap:7px;padding:7px 10px;cursor:pointer;font-size:12px;color:#444;border-bottom:1px solid #f0f0f0;}
+.sbi:hover,.sbi.on{background:#e8f8f3;color:#00c896;font-weight:700;}
+.ico{width:22px;height:22px;border-radius:4px;background:#e8f8f3;color:#00c896;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;flex-shrink:0;}
+.ico.cp{background:#f3f0ff;color:#7c3aed;}
+.main{padding:14px;overflow-y:auto;max-height:500px;background:#f8f9fa;}
+.ph{display:flex;flex-direction:column;align-items:center;justify-content:center;height:360px;gap:9px;color:#999;text-align:center;}
+.btn{background:#00c896;color:#000;border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;}
+.btn:hover{opacity:.87;} .btn:disabled{opacity:.4;cursor:not-allowed;}
+.btng{background:#f0f2f5;color:#444;border:1px solid #ddd;padding:7px 12px;border-radius:8px;font-size:12px;cursor:pointer;}
+.btng:hover{background:#e4e4e4;}
+.lbl{font-size:11px;font-weight:700;color:#555;margin-bottom:4px;display:block;}
+select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-radius:7px;font-size:13px;margin-bottom:10px;background:#fff;}
+.qo{border:2px solid #e0e0e0;border-radius:8px;padding:8px 11px;margin-bottom:6px;cursor:pointer;font-size:13px;display:flex;align-items:center;gap:9px;background:#fff;}
+.qo:hover:not(.dis){border-color:#00c896;}
+.qo.ok{border-color:#22c55e;background:#f0fdf4;color:#15803d;}
+.qo.ng{border-color:#ef4444;background:#fef2f2;color:#b91c1c;}
+.qo.dis{cursor:default;}
+.oc{width:20px;height:20px;border-radius:50%;border:2px solid #ddd;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;}
+.qo.ok .oc{background:#22c55e;border-color:#22c55e;color:#fff;}
+.qo.ng .oc{background:#ef4444;border-color:#ef4444;color:#fff;}
+.fbox{background:#1a1a2e;color:#f59e0b;border-radius:6px;padding:6px 10px;font-family:monospace;font-size:12px;margin:5px 0;}
+.pbar-w{height:5px;background:#e0e0e0;border-radius:3px;overflow:hidden;margin-bottom:12px;}
+.pbar{height:100%;background:#00c896;border-radius:3px;transition:width .3s;}
+.cb{background:#f8f9fa;border:1px solid #e0e0e0;border-radius:10px;padding:10px;min-height:240px;max-height:300px;overflow-y:auto;margin-bottom:10px;display:flex;flex-direction:column;gap:8px;}
+.msg{display:flex;gap:8px;max-width:90%;}
+.msg.u{align-self:flex-end;flex-direction:row-reverse;}
+.msg.b{align-self:flex-start;}
+.av{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;flex-shrink:0;background:#00c896;color:#000;}
+.msg.u .av{background:#7c3aed;color:#fff;}
+.bub{background:#fff;border:1px solid #e0e0e0;border-radius:9px;padding:7px 10px;font-size:12px;line-height:1.6;}
+.msg.u .bub{background:#7c3aed;color:#fff;border-color:#7c3aed;}
+.spin{width:22px;height:22px;border:3px solid #e0e0e0;border-top-color:#00c896;border-radius:50%;animation:sp .8s linear infinite;margin:12px auto;}
+@keyframes sp{to{transform:rotate(360deg);}}
+.moverlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:200;align-items:flex-start;justify-content:center;padding:14px;overflow-y:auto;}
+.moverlay.on{display:flex;}
+.mbox{background:#fff;border-radius:13px;max-width:560px;width:100%;margin:auto;padding:18px;position:relative;}
+.mc{position:absolute;top:10px;right:10px;background:#f0f2f5;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:14px;}
+.mt{background:none;border:none;border-bottom:2px solid transparent;padding:5px 9px;font-size:12px;color:#666;cursor:pointer;margin-bottom:-1px;}
+.mt.on{border-bottom-color:#00c896;color:#00c896;font-weight:700;}
+.prow{display:flex;align-items:center;justify-content:space-between;padding:8px 10px;background:#f8f9fa;border:1px solid #e0e0e0;border-radius:7px;margin-bottom:6px;}
+.olink{background:#00c896;color:#000;border:none;padding:4px 10px;border-radius:5px;font-size:11px;font-weight:700;text-decoration:none;cursor:pointer;}
+.hot{background:#fef3c7;color:#b45309;border-radius:99px;padding:1px 6px;font-size:11px;font-weight:700;}
+.app{background:#e8f8f3;color:#00c896;border-radius:99px;padding:1px 6px;font-size:11px;}
+.trtbl{width:100%;border-collapse:collapse;font-size:12px;}
+.trtbl th{background:#1a1a2e;color:#fff;padding:7px 9px;text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.05em;white-space:nowrap;}
+.trtbl td{padding:6px 9px;border-bottom:1px solid #f0f0f0;}
+.trtbl tr:hover td{background:#f8f9fa;}
+@media(max-width:580px){.split{grid-template-columns:1fr;}.sb{max-height:150px;border-right:none;border-bottom:1px solid #e0e0e0;}.grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));}}
+
+.auth-bar{background:#111;padding:6px 12px;display:flex;align-items:center;justify-content:flex-end;gap:10px;font-size:12px;}
+.auth-bar a,.auth-bar button{color:#00c896;background:none;border:none;cursor:pointer;font-size:12px;text-decoration:none;}
+.auth-bar .user-name{color:#fff;}
+.auth-avatar{width:26px;height:26px;border-radius:50%;border:2px solid #00c896;vertical-align:middle;margin-right:5px;}
+.auth-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:300;align-items:center;justify-content:center;}
+.auth-modal.on{display:flex;}
+.auth-box{background:#fff;border-radius:14px;max-width:380px;width:95%;padding:28px;text-align:center;}
+.auth-box h2{font-size:18px;font-weight:700;margin-bottom:6px;}
+.auth-box p{font-size:12px;color:#666;margin-bottom:20px;}
+.google-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;border:2px solid #ddd;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:600;cursor:pointer;width:100%;margin-bottom:10px;transition:border-color .2s;}
+.google-btn:hover{border-color:#00c896;}
+.google-btn img{width:20px;height:20px;}
+.pp-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#ffc439;border:none;border-radius:8px;padding:11px 20px;font-size:14px;font-weight:700;cursor:pointer;width:100%;color:#003087;}
+.pp-btn:hover{opacity:.9;}
+.profile-page{max-width:600px;margin:0 auto;}
+.stat-card{background:#fff;border-radius:10px;padding:16px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.08);}
+.stat-card .big{font-size:28px;font-weight:700;color:#00c896;}
+.stat-card .lbl2{font-size:12px;color:#666;margin-top:3px;}
+.badge{display:inline-block;padding:4px 10px;border-radius:99px;font-size:11px;font-weight:700;margin:3px;}
+.badge.gold{background:#fef3c7;color:#b45309;}
+.badge.green{background:#e8f8f3;color:#00c896;}
+.badge.blue{background:#eff6ff;color:#1d4ed8;}
+.progress-bar{height:8px;background:#f0f2f5;border-radius:4px;overflow:hidden;margin-top:6px;}
+.progress-fill{height:100%;background:#00c896;border-radius:4px;transition:width .4s;}
+.history-item{background:#fff;border-radius:8px;padding:10px 14px;margin-bottom:8px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 3px rgba(0,0,0,.06);}
+
+.paywall-overlay{position:fixed;inset:0;background:linear-gradient(135deg,#0a0e1a 0%,#1a1a2e 100%);z-index:9999;display:flex;align-items:center;justify-content:center;padding:16px;}
+.paywall-box{background:#fff;border-radius:18px;max-width:440px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+.paywall-header{background:linear-gradient(135deg,#1a1a2e,#2d2d5e);color:#fff;padding:28px 24px 20px;text-align:center;}
+.paywall-header .logo-big{font-size:36px;margin-bottom:6px;}
+.paywall-header h1{font-size:22px;font-weight:700;margin-bottom:4px;}
+.paywall-header .sub{font-size:13px;color:#aaa;}
+.paywall-body{padding:24px;}
+.price-tag{text-align:center;margin-bottom:20px;}
+.price-tag .amount{font-size:42px;font-weight:700;color:#1a1a2e;}
+.price-tag .amount sup{font-size:20px;vertical-align:top;margin-top:8px;display:inline-block;}
+.price-tag .period{font-size:13px;color:#888;margin-top:2px;}
+.features-list{list-style:none;margin-bottom:20px;}
+.features-list li{display:flex;align-items:center;gap:9px;font-size:13px;padding:5px 0;border-bottom:1px solid #f5f5f5;}
+.features-list li:last-child{border-bottom:none;}
+.features-list li .ck{color:#00c896;font-size:16px;flex-shrink:0;}
+.pay-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#ffc439;border:none;border-radius:10px;padding:14px 20px;font-size:16px;font-weight:700;cursor:pointer;width:100%;color:#003087;margin-bottom:10px;transition:opacity .2s;}
+.pay-btn:hover{opacity:.9;}
+.pay-btn svg{flex-shrink:0;}
+.unlock-section{border-top:1px solid #f0f0f0;margin-top:16px;padding-top:16px;}
+.unlock-section p{font-size:12px;color:#888;margin-bottom:8px;text-align:center;}
+.unlock-row{display:flex;gap:8px;}
+.unlock-input{flex:1;padding:9px 12px;border:2px solid #e0e0e0;border-radius:8px;font-size:13px;outline:none;}
+.unlock-input:focus{border-color:#00c896;}
+.unlock-btn{background:#00c896;color:#000;border:none;border-radius:8px;padding:9px 16px;font-size:13px;font-weight:700;cursor:pointer;}
+.unlock-btn:hover{opacity:.87;}
+.unlock-err{color:#ef4444;font-size:11px;margin-top:5px;display:none;text-align:center;}
+.trial-link{text-align:center;margin-top:12px;}
+.trial-link button{background:none;border:none;color:#888;font-size:11px;cursor:pointer;text-decoration:underline;}
+.paywall-footer{background:#f8f9fa;padding:12px 24px;text-align:center;font-size:11px;color:#aaa;}
+</style>
+</head>
+<body>
+
+<div id="paywall" class="paywall-overlay">
+  <div class="paywall-box">
+    <div class="paywall-header">
+      <div class="logo-big">&#127891;</div>
+      <h1>CXC Study Hub</h1>
+      <div class="sub">Complete CSEC &amp; CAPE exam preparation</div>
+    </div>
+    <div class="paywall-body">
+      <div class="price-tag">
+        <div class="amount"><sup>$</sup>10.99</div>
+        <div class="period">One-time payment &mdash; lifetime access</div>
+      </div>
+      <ul class="features-list">
+        <li><span class="ck">&#10003;</span> 22 CSEC + 17 CAPE subjects</li>
+        <li><span class="ck">&#10003;</span> Unlimited AI-generated quiz questions</li>
+        <li><span class="ck">&#10003;</span> Full mock exam paper generator</li>
+        <li><span class="ck">&#10003;</span> Topic-by-topic revision notes</li>
+        <li><span class="ck">&#10003;</span> Year-by-year topic frequency tracker</li>
+        <li><span class="ck">&#10003;</span> AI personal tutor &mdash; unlimited</li>
+        <li><span class="ck">&#10003;</span> Progress tracking &amp; badges</li>
+      </ul>
+      <button class="pay-btn" onclick="goToPayPal()">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 2.72a.77.77 0 0 1 .76-.65h6.816c2.25 0 3.836.468 4.71 1.39.824.866 1.008 2.1.546 3.67l-.007.02c-.638 2.19-1.76 3.318-3.34 3.857-.523.178-1.09.28-1.7.31H9.847l-.747 4.85a.641.641 0 0 1-.633.54H7.076v4.63z"/></svg>
+        Pay $10.99 with PayPal
+      </button>
+      <div class="unlock-section">
+        <p>Already paid? Enter your access code below.</p>
+        <div class="unlock-row">
+          <input type="text" class="unlock-input" id="unlock-input" placeholder="Enter access code..." maxlength="20"/>
+          <button class="unlock-btn" onclick="tryUnlock()">Unlock</button>
+        </div>
+        <div class="unlock-err" id="unlock-err">Invalid code. Please try again or contact support.</div>
+      </div>
+      <div class="trial-link">
+        <button onclick="startTrial()">Try 3 free questions (no account needed)</button>
+      </div>
+    </div>
+    <div class="paywall-footer">
+      Secure payment via PayPal &bull; Instant access after payment &bull; support@cxchub.com
+    </div>
+  </div>
+</div>
+
+<div class="auth-bar" id="auth-bar">
+  <span id="auth-status">
+    <button onclick="openAuthModal()">Sign In / Register</button>
+    <span style="color:#555;">|</span>
+    <a href="#" onclick="openPayPal();return false;">&#9829; Support us</a>
+  </span>
+</div>
+<nav>
+  <span class="logo">CXC Hub</span>
+  <button class="nb on" data-tab="subjects">Subjects</button>
+  <button class="nb" data-tab="notes">Notes</button>
+  <button class="nb" data-tab="quiz">Quiz</button>
+  <button class="nb" data-tab="mock">Mock Papers</button>
+  <button class="nb" data-tab="tracker">Tracker</button>
+  <button class="nb" data-tab="tutor">AI Tutor</button>
+  <button class="nb" data-tab="links">Links</button>
+  <button class="nb" data-tab="profile">&#128100; Profile</button>
+</nav>
+<div class="hero">
+  <h1>Master <span>CSEC</span> &amp; CAPE</h1>
+  <p>Past papers, AI mock exams, question bank, revision notes, topic tracker and AI tutor &mdash; all free.</p>
+  <div class="stats">
+    <div><div class="sn">22</div><div class="sl">CSEC subjects</div></div>
+    <div><div class="sn">17</div><div class="sl">CAPE subjects</div></div>
+    <div><div class="sn">&#9889;</div><div class="sl">Question bank</div></div>
+    <div><div class="sn">AI</div><div class="sl">Mock papers &amp; tutor</div></div>
+  </div>
+</div>
+<div id="pg-subjects" class="pg on">
+  <div id="spills" style="margin-bottom:12px;"></div>
+  <div id="scont"></div>
+</div>
+<div id="pg-notes" class="pg">
+  <div class="split">
+    <div class="sb" id="nsb"></div>
+    <div class="main" id="nmain"><div class="ph"><div style="font-size:32px;">&#128221;</div><h3 style="font-size:14px;color:#444;">Select a Subject</h3><p style="font-size:12px;">Revision notes for every CSEC and CAPE subject.</p></div></div>
+  </div>
+</div>
+<div id="pg-quiz" class="pg">
+  <div id="qsetup" class="card" style="max-width:480px;margin:0 auto;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Practice Quiz</div>
+    <div style="font-size:12px;color:#666;margin-bottom:14px;">Instant question bank or AI-generated questions.</div>
+    <div style="margin-bottom:12px;">
+      <button class="pill on" id="mb-bank">&#9889; Question Bank</button>
+      <button class="pill" id="mb-ai">&#129302; AI Generated</button>
+    </div>
+    <div id="bank-note" style="background:#e8f8f3;border-radius:7px;padding:8px;font-size:11px;color:#00c896;margin-bottom:10px;">Instant &mdash; built-in questions for: Maths, Biology, Chemistry, Physics, POB, POA, English A, IT (CSEC)</div>
+    <label class="lbl">Level</label>
+    <select id="qlevel"></select>
+    <label class="lbl">Subject</label>
+    <select id="qsubj"></select>
+    <div id="aiopts" style="display:none;">
+      <label class="lbl">Difficulty</label>
+      <select id="qdiff"><option>Foundation</option><option selected>Standard</option><option>Advanced</option></select>
+      <label class="lbl">Topic focus (optional)</label>
+      <input type="text" id="qtopic" placeholder="e.g. Genetics, Integration..."/>
+    </div>
+    <label class="lbl">Questions</label>
+    <select id="qcnt"><option value="5">5</option><option value="10" selected>10</option><option value="15">15</option></select>
+    <button class="btn" id="startbtn" style="width:100%;padding:10px;font-size:13px;margin-top:4px;">Start Quiz &rarr;</button>
+  </div>
+  <div id="qactive" style="display:none;max-width:560px;margin:0 auto;"></div>
+  <div id="qresults" style="display:none;max-width:480px;margin:0 auto;text-align:center;"></div>
+</div>
+<div id="pg-mock" class="pg">
+  <div class="card" style="max-width:580px;margin:0 auto 12px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Mock Paper Generator</div>
+    <div style="font-size:12px;color:#666;margin-bottom:12px;">Generate a full CXC-style exam paper. Download or print.</div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;align-items:flex-end;margin-bottom:8px;">
+      <div style="min-width:95px;"><label class="lbl">Level</label><select id="mlevel" style="margin-bottom:0;"></select></div>
+      <div style="flex:1;min-width:150px;"><label class="lbl">Subject</label><select id="msubj" style="margin-bottom:0;"></select></div>
+      <button class="btn" id="genbtn" style="margin-top:16px;">Generate &rarr;</button>
+    </div>
+    <div style="font-size:11px;color:#999;margin-top:6px;">AI-generated practice papers styled after real CXC exams. For official papers visit cxcpastpaper.online</div>
+  </div>
+  <div id="mockout" style="max-width:580px;margin:0 auto;"></div>
+</div>
+<div id="pg-tracker" class="pg">
+  <div class="card" style="margin-bottom:12px;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Topic Frequency Tracker</div>
+    <div style="font-size:12px;color:#666;margin-bottom:10px;">Year-by-year topic appearances. <span class="hot">&#9733; Gold = frequently tested</span></div>
+    <div style="display:flex;gap:9px;flex-wrap:wrap;">
+      <select id="tlevel" style="width:auto;margin-bottom:0;"></select>
+      <select id="tsubj" style="width:auto;margin-bottom:0;"></select>
+    </div>
+  </div>
+  <div id="trout" style="overflow-x:auto;"></div>
+</div>
+<div id="pg-tutor" class="pg">
+  <div style="max-width:680px;margin:0 auto;">
+    <div style="font-size:15px;font-weight:700;margin-bottom:3px;">AI Tutor</div>
+    <div style="font-size:12px;color:#666;margin-bottom:10px;">Ask anything about CSEC or CAPE. Free and unlimited.</div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;">
+      <span style="font-size:12px;color:#666;">Quick questions:</span>
+      <select id="tqlevel" style="width:auto;padding:3px 6px;font-size:12px;margin-bottom:0;"></select>
+    </div>
+    <div id="tsugg" style="margin-bottom:10px;"></div>
+    <div class="cb" id="chatbox"></div>
+    <div style="display:flex;gap:7px;">
+      <input type="text" id="chatin" placeholder="Ask anything about CSEC or CAPE..." style="flex:1;margin-bottom:0;"/>
+      <button class="btn" id="sendbtn">Send</button>
+    </div>
+  </div>
+</div>
+<div id="pg-links" class="pg">
+  <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Free Past Paper Sites</div>
+  <div style="font-size:12px;color:#666;margin-bottom:14px;">All completely free. No payment or sign-up required.</div>
+  <div id="lgrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:10px;margin-bottom:20px;"></div>
+  <div style="font-size:14px;font-weight:700;margin-bottom:10px;">Exam Tips</div>
+  <div id="tgrid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:8px;"></div>
+</div>
+<div class="moverlay" id="moverlay">
+  <div class="mbox" id="mbox"></div>
+</div>
+<script>
+"use strict";
+
+
+// ── DATA ─────────────────────────────────────────────────────────────────────
+var CSEC=[
+{id:"maths",n:"Mathematics",i:"M",cat:"science",d:"Core numerical and algebraic skills.",papers:["Paper 01 - MC","Paper 02 - Structured"],topics:["Number Theory","Algebra","Geometry","Trigonometry","Statistics","Consumer Arithmetic"],tips:["Show all working","Draw diagrams","Know your formulae"],url:"https://cxcpastpaper.online/csec-mathematics-past-papers/"},
+{id:"bio",n:"Biology",i:"B",cat:"science",d:"Life sciences - cells, genetics, ecology.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Cell Biology","Genetics","Ecology","Transport","Reproduction"],tips:["Learn all diagrams","SBA counts 20 percent"],url:"https://cxcpastpaper.online/csec-biology-past-papers/"},
+{id:"chem",n:"Chemistry",i:"C",cat:"science",d:"Matter, reactions, periodic table.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Atomic Structure","Bonding","Acids and Bases","Organic","The Mole"],tips:["Master the mole concept","Balance equations daily"],url:"https://cxcpastpaper.online/csec-chemistry-past-papers/"},
+{id:"phys",n:"Physics",i:"P",cat:"science",d:"Mechanics, electricity, waves.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Mechanics","Waves","Electricity","Thermal","Atomic"],tips:["Learn all formulae","Show formula then substitution then answer"],url:"https://cxcpastpaper.online/csec-physics-past-papers/"},
+{id:"hsb",n:"Human and Social Biology",i:"HS",cat:"science",d:"Human body systems and health.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Nutrition","Circulation","Reproductive Health","Disease"],tips:["Focus on real-world applications"],url:"https://cxcpastpaper.online/csec-human-and-social-biology-past-papers/"},
+{id:"ints",n:"Integrated Science",i:"IS",cat:"science",d:"Combined physics, chemistry, biology.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Matter","Energy","Living Organisms","Ecosystems"],tips:["Balance all three disciplines"],url:"https://cxcpastpaper.online"},
+{id:"agri",n:"Agricultural Science",i:"AS",cat:"science",d:"Crop science and farm management.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Soils","Crop Production","Animal Husbandry"],tips:["Document SBA thoroughly"],url:"https://cxcpastpaper.online"},
+{id:"social",n:"Social Studies",i:"SS",cat:"humanities",d:"Caribbean society and development.",papers:["Paper 01","Paper 02 - Essay","Paper 03 - SBA"],topics:["Individual and Society","Caribbean Economy","Government","Population"],tips:["Use Caribbean examples","SBA counts heavily"],url:"https://cxcpastpaper.online/csec-social-studies-past-papers/"},
+{id:"hist",n:"History",i:"HI",cat:"humanities",d:"Caribbean history.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Amerindians","Slavery","Emancipation","Independence","CARICOM"],tips:["Analyse sources critically"],url:"https://cxcpastpaper.online"},
+{id:"geo",n:"Geography",i:"G",cat:"humanities",d:"Physical and human geography.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Map Reading","Plate Tectonics","Climate","Population"],tips:["Practise map reading"],url:"https://cxcpastpaper.online/csec-geography-past-papers/"},
+{id:"caribhist",n:"Caribbean History",i:"CH",cat:"humanities",d:"Caribbean development and identity.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Pre-Columbian","Colonization","Slavery","Resistance","Independence"],tips:["Master essay writing"],url:"https://cxcpastpaper.online"},
+{id:"pob",n:"Principles of Business",i:"PB",cat:"business",d:"Business organisation and marketing.",papers:["Paper 01","Paper 02 - Essay","Paper 03 - SBA"],topics:["Types of Business","Management","Marketing Mix","Production","Trade"],tips:["SBA - use a real business"],url:"https://cxcpastpaper.online/csec-principles-of-business-past-papers/"},
+{id:"poa",n:"Principles of Accounts",i:"PA",cat:"business",d:"Bookkeeping and financial statements.",papers:["Paper 01","Paper 02 - Practical"],topics:["Double Entry","Trial Balance","Income Statement","Balance Sheet"],tips:["Know debits and credits","Always balance"],url:"https://cxcpastpaper.online/csec-principles-of-accounts-past-papers/"},
+{id:"econ",n:"Economics",i:"EC",cat:"business",d:"Micro and macroeconomics.",papers:["Paper 01","Paper 02 - Essay"],topics:["Demand and Supply","Market Structures","National Income","Money"],tips:["Draw all diagrams","Master elasticity"],url:"https://cxcpastpaper.online"},
+{id:"offadm",n:"Office Administration",i:"OA",cat:"business",d:"Administrative procedures.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Office Procedures","Communication","Record Management"],tips:["Know all document types"],url:"https://cxcpastpaper.online"},
+{id:"eng",n:"English A",i:"EA",cat:"language",d:"Reading, writing and grammar. Required.",papers:["Paper 01","Paper 02 - Writing","Paper 03 - SBA"],topics:["Comprehension","Summary","Narrative","Expository","Grammar"],tips:["Read passage TWICE","Plan essays first"],url:"https://cxcpastpaper.online/csec-english-a-past-papers/"},
+{id:"engb",n:"English B - Literature",i:"EB",cat:"language",d:"Literary analysis of prose, poetry, drama.",papers:["Paper 01 - Unseen","Paper 02 - Set Texts"],topics:["Poetry","Prose Fiction","Drama","Literary Devices"],tips:["Know set texts inside out"],url:"https://cxcpastpaper.online"},
+{id:"span",n:"Spanish",i:"Sp",cat:"language",d:"Reading, writing, listening, speaking.",papers:["Paper 01","Paper 02","Paper 03 - Oral"],topics:["Vocabulary","Grammar","Comprehension","Composition"],tips:["Immerse with Spanish media"],url:"https://cxcpastpaper.online"},
+{id:"fren",n:"French",i:"Fr",cat:"language",d:"Reading, writing, listening, speaking.",papers:["Paper 01","Paper 02","Paper 03 - Oral"],topics:["Grammar","Vocabulary","Comprehension"],tips:["Know irregular verbs"],url:"https://cxcpastpaper.online"},
+{id:"it",n:"Information Technology",i:"IT",cat:"technology",d:"Computer systems, networking, programming.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Hardware","Networking","Databases","Security","Programming"],tips:["SBA practical is key"],url:"https://cxcpastpaper.online/csec-information-technology-past-papers/"},
+{id:"edpm",n:"EDPM",i:"ED",cat:"technology",d:"Electronic Document Preparation.",papers:["Paper 01","Paper 02 - Practical"],topics:["Word Processing","DTP","Data Entry"],tips:["Speed and accuracy matter"],url:"https://cxcpastpaper.online"},
+{id:"food",n:"Food and Nutrition",i:"FN",cat:"technology",d:"Food science and nutrition.",papers:["Paper 01","Paper 02","Paper 03 - SBA"],topics:["Nutrients","Meal Planning","Food Preservation"],tips:["Know all vitamins"],url:"https://cxcpastpaper.online"}
+];
+
+var CAPE=[
+{id:"cp-pm",n:"Pure Mathematics",i:"PM",cat:"science",d:"Advanced pure maths - Unit 1 and 2.",papers:["Paper 01","Paper 02"],units:["Unit 1: Algebra, Functions, Calculus","Unit 2: Complex Numbers, Sequences, DEs"],topics:["Differentiation","Integration","Complex Numbers","Sequences","Differential Equations"],tips:["Calculus dominates - master it"],url:"https://cxcpastpaper.online/cape-mathematics-past-papers/"},
+{id:"cp-am",n:"Applied Mathematics",i:"AM",cat:"science",d:"Statistics, mechanics and operational research.",papers:["Paper 01","Paper 02"],units:["Unit 1: Statistics and Probability","Unit 2: Mechanics and OR"],topics:["Probability","Distributions","Hypothesis Testing","Mechanics"],tips:["Statistics unit is more accessible"],url:"https://cxcpastpaper.online"},
+{id:"cp-bio",n:"Biology",i:"B",cat:"science",d:"Advanced life sciences - Unit 1 and 2.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Biochemistry, Cell Biology, Genetics","Unit 2: Animal Biology, Ecology, Biotechnology"],topics:["Biochemistry","Cell Biology","Genetics","Biotechnology","Physiology"],tips:["IA counts 20 percent - start early"],url:"https://cxcpastpaper.online/cape-biology-past-papers/"},
+{id:"cp-chem",n:"Chemistry",i:"C",cat:"science",d:"Advanced chemistry - Unit 1 and 2.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Fundamentals","Unit 2: Reactions and Organic"],topics:["Energetics","Kinetics","Equilibria","Organic Chemistry","Spectroscopy"],tips:["Unit 2 organic is most tested"],url:"https://cxcpastpaper.online/cape-chemistry-past-papers/"},
+{id:"cp-phys",n:"Physics",i:"P",cat:"science",d:"Advanced physics - Unit 1 and 2.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Mechanics, Oscillations, Waves","Unit 2: Electricity, Magnetism, Modern Physics"],topics:["Mechanics","SHM","Waves","Electromagnetism","Quantum Physics"],tips:["Know all derivations"],url:"https://cxcpastpaper.online/cape-physics-past-papers/"},
+{id:"cp-env",n:"Environmental Science",i:"ES",cat:"science",d:"Earth systems, ecology and environment.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Physical Environment","Unit 2: Environmental Management"],topics:["Earth Systems","Ecosystems","Climate Change","Pollution"],tips:["Caribbean environmental issues are key"],url:"https://cxcpastpaper.online"},
+{id:"cp-agri",n:"Agricultural Science",i:"AS",cat:"science",d:"Advanced agriculture.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Crop Science","Unit 2: Animal Science and Farm Management"],topics:["Soil Science","Plant Physiology","Animal Husbandry","Biotechnology"],tips:["IA must include field data"],url:"https://cxcpastpaper.online"},
+{id:"cp-econ",n:"Economics",i:"EC",cat:"business",d:"Advanced micro and macroeconomics.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Microeconomics","Unit 2: Macroeconomics"],topics:["Consumer Theory","Market Failure","National Income","Monetary Policy"],tips:["Draw and label ALL diagrams"],url:"https://cxcpastpaper.online/cape-economics-past-papers/"},
+{id:"cp-acc",n:"Accounting",i:"AC",cat:"business",d:"Advanced financial and management accounting.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Financial Accounting","Unit 2: Cost and Management Accounting"],topics:["Company Accounts","Cash Flow","CVP Analysis","Budgeting"],tips:["Company accounts format must be perfect"],url:"https://cxcpastpaper.online/cape-accounting-past-papers/"},
+{id:"cp-mob",n:"Management of Business",i:"MB",cat:"business",d:"Business strategy, management, entrepreneurship.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Business and Environment","Unit 2: Business Strategy"],topics:["SWOT and PESTLE","Marketing 7Ps","HR Management","Operations"],tips:["Case study means apply theory to context"],url:"https://cxcpastpaper.online/cape-management-of-business-past-papers/"},
+{id:"cp-cs",n:"Caribbean Studies",i:"CS",cat:"humanities",d:"Interdisciplinary study of Caribbean society.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Caribbean Society and Culture","Unit 2: Issues in Caribbean Development"],topics:["Caribbean Identity","Creolisation","Governance","Development","CARICOM"],tips:["IA research paper is a major grade"],url:"https://cxcpastpaper.online/cape-caribbean-studies-past-papers/"},
+{id:"cp-hist",n:"History",i:"HI",cat:"humanities",d:"Caribbean and world history - advanced.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Caribbean History to 1985","Unit 2: Caribbean History 1985 to present"],topics:["Independence","Federation","Cold War","CARICOM"],tips:["Extended essays need sustained argument"],url:"https://cxcpastpaper.online"},
+{id:"cp-geo",n:"Geography",i:"G",cat:"humanities",d:"Physical and human geography - advanced.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Physical Geography","Unit 2: Human and Economic Geography"],topics:["Geomorphology","Climate Systems","Population","Economic Geography"],tips:["IA fieldwork must be rigorous"],url:"https://cxcpastpaper.online"},
+{id:"cp-law",n:"Law",i:"LW",cat:"humanities",d:"Caribbean and international law.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Law Foundations","Unit 2: Law in Practice"],topics:["Sources of Law","Constitutional Law","Contract","Tort","Criminal Law"],tips:["Cite cases with name and year"],url:"https://cxcpastpaper.online"},
+{id:"cp-soc",n:"Sociology",i:"So",cat:"humanities",d:"Caribbean society and social institutions.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Caribbean Society","Unit 2: Social Institutions"],topics:["Sociological Perspectives","Stratification","Gender","Family"],tips:["Use Caribbean sociologists"],url:"https://cxcpastpaper.online"},
+{id:"cp-comm",n:"Communication Studies",i:"CM",cat:"language",d:"Language, communication theory and media.",papers:["Paper 01","Paper 02","Paper 03 - IA Portfolio"],units:["Unit 1: Language and Community","Unit 2: Speaking and Writing"],topics:["Language Theory","Oral Communication","Expository Writing","Media"],tips:["IA portfolio - build from week 1"],url:"https://cxcpastpaper.online/cape-communication-studies-past-papers/"},
+{id:"cp-lit",n:"Literatures in English",i:"LE",cat:"language",d:"Caribbean and world literature - advanced.",papers:["Paper 01","Paper 02","Paper 03 - IA"],units:["Unit 1: Poetry and Short Story","Unit 2: Drama and Novel"],topics:["Caribbean Poetry","Short Fiction","Drama","Novel","Literary Theory"],tips:["Close reading is the most tested skill"],url:"https://cxcpastpaper.online"}
+];
+
+var ALL_S = CSEC.map(function(s){return Object.assign({},s,{level:"csec"});}).concat(CAPE.map(function(s){return Object.assign({},s,{level:"cape"});}));
+
+var QB={
+maths:[
+{q:"If 3x + 7 = 22, what is x?",opts:["A) 3","B) 4","C) 5","D) 6"],a:2,e:"3x = 22-7 = 15, so x = 5.",t:"Algebra"},
+{q:"HCF of 24 and 36?",opts:["A) 4","B) 6","C) 12","D) 18"],a:2,e:"24=2x2x2x3, 36=2x2x3x3. HCF = 2x2x3 = 12.",t:"Number Theory"},
+{q:"Area of circle with radius 7 cm?",opts:["A) 44 cm2","B) 154 cm2","C) 88 cm2","D) 308 cm2"],a:1,e:"A = pi x r2 = pi x 49 = approx 154 cm2",t:"Geometry"},
+{q:"Gradient of y = 3x - 5?",opts:["A) -5","B) 3","C) 5","D) -3"],a:1,e:"In y = mx + c, m = 3 is the gradient.",t:"Algebra"},
+{q:"Mean of 5,8,12,x,10 is 9. Find x.",opts:["A) 8","B) 10","C) 11","D) 12"],a:1,e:"Sum=9x5=45. 5+8+12+10=35. x=45-35=10.",t:"Statistics"},
+{q:"Factorise: x squared minus x minus 6",opts:["A) (x-3)(x+2)","B) (x+3)(x-2)","C) (x-6)(x+1)","D) (x+6)(x-1)"],a:0,e:"Need factors of -6 that add to -1: -3 and +2. So (x-3)(x+2).",t:"Algebra"},
+{q:"sin 30 degrees equals",opts:["A) root3 over 2","B) 1 over root2","C) 1 over 2","D) root3 over 3"],a:2,e:"sin 30 = 1/2. A standard value to memorise.",t:"Trigonometry"},
+{q:"15% of $240 equals",opts:["A) $24","B) $36","C) $40","D) $48"],a:1,e:"15/100 x 240 = $36.",t:"Consumer Arithmetic"},
+{q:"Solve: 2(x + 3) = 14",opts:["A) x = 2","B) x = 3","C) x = 4","D) x = 5"],a:2,e:"2x + 6 = 14, then 2x = 8, then x = 4.",t:"Algebra"},
+{q:"0.35 as a fraction in simplest form?",opts:["A) 35/100","B) 7/20","C) 7/25","D) 3/5"],a:1,e:"0.35 = 35/100 = 7/20 after dividing by 5.",t:"Number Theory"}
+],
+bio:[
+{q:"Which organelle is site of aerobic respiration?",opts:["A) Nucleus","B) Ribosome","C) Mitochondria","D) Chloroplast"],a:2,e:"Mitochondria produces ATP through aerobic respiration.",t:"Cell Biology"},
+{q:"Osmosis is the movement of:",opts:["A) Glucose high to low","B) Water low to high water potential","C) Water high to low water potential","D) Ions against gradient"],a:2,e:"Osmosis is water movement through semi-permeable membrane from high to low water potential.",t:"Cell Biology"},
+{q:"In Tt x Tt cross, fraction that will be short (tt)?",opts:["A) 1 in 4","B) 1 in 2","C) 3 in 4","D) 0"],a:0,e:"Tt x Tt gives TT:Tt:tt = 1:2:1. Only tt (1 in 4) is short.",t:"Genetics"},
+{q:"Photosynthesis produces which gas?",opts:["A) Carbon dioxide","B) Nitrogen","C) Oxygen","D) Hydrogen"],a:2,e:"6CO2 + 6H2O gives glucose + 6O2. Oxygen is released.",t:"Cell Biology"},
+{q:"Active transport differs from diffusion because it:",opts:["A) Moves along gradient","B) Requires energy (ATP)","C) Only moves water","D) Needs no carrier proteins"],a:1,e:"Active transport requires ATP to move substances against the concentration gradient.",t:"Cell Biology"}
+],
+chem:[
+{q:"Moles in 44g of CO2? (C=12, O=16)",opts:["A) 0.5 mol","B) 1 mol","C) 2 mol","D) 4 mol"],a:1,e:"Molar mass CO2 = 12+(2x16) = 44 g per mol. 44 divided by 44 = 1 mol.",t:"The Mole"},
+{q:"Acid plus metal carbonate products are:",opts:["A) Salt and water","B) Salt plus water plus CO2","C) Salt plus hydrogen","D) Water plus CO2"],a:1,e:"Acid + carbonate gives salt + water + carbon dioxide gas.",t:"Acids and Bases"},
+{q:"Which is an alkene?",opts:["A) CH4","B) C2H6","C) C2H4","D) C3H8"],a:2,e:"C2H4 (ethene) has formula CnH2n and a C=C double bond.",t:"Organic"},
+{q:"pH of 2 is:",opts:["A) Strongly alkaline","B) Weakly acidic","C) Neutral","D) Strongly acidic"],a:3,e:"pH 2 is very low (scale 0-14) meaning strongly acidic.",t:"Acids and Bases"}
+],
+phys:[
+{q:"Car goes 0 to 20 m/s in 5s. Acceleration =",opts:["A) 2 m/s2","B) 4 m/s2","C) 5 m/s2","D) 10 m/s2"],a:1,e:"a = (v-u)/t = (20-0)/5 = 4 m/s2",t:"Mechanics"},
+{q:"F = 20N, m = 4kg. Acceleration =",opts:["A) 0.2 m/s2","B) 5 m/s2","C) 16 m/s2","D) 80 m/s2"],a:1,e:"F = ma so a = F/m = 20/4 = 5 m/s2",t:"Mechanics"},
+{q:"Unit of electrical resistance is:",opts:["A) Volt","B) Ampere","C) Watt","D) Ohm"],a:3,e:"Resistance is measured in Ohms.",t:"Electricity"},
+{q:"Series circuit R1=3 ohm R2=7 ohm. Total R =",opts:["A) 2.1 ohm","B) 4 ohm","C) 10 ohm","D) 21 ohm"],a:2,e:"Series: R total = R1 + R2 = 3 + 7 = 10 ohm",t:"Electricity"}
+],
+pob:[
+{q:"Which business has unlimited liability?",opts:["A) Private limited company","B) Public limited company","C) Sole trader","D) Co-operative"],a:2,e:"Sole trader has unlimited liability meaning personal assets can pay business debts.",t:"Business Types"},
+{q:"Place in marketing mix means:",opts:["A) HQ location","B) How product reaches consumers","C) Where ads are placed","D) Country of manufacture"],a:1,e:"Place = distribution channels, how product gets from producer to consumer.",t:"Marketing Mix"},
+{q:"Penetration pricing means:",opts:["A) High price for premium","B) Match competitors","C) Low price to capture market share","D) Psychological pricing"],a:2,e:"Penetration pricing = low entry price to attract customers quickly.",t:"Marketing Mix"}
+],
+poa:[
+{q:"Cash received from debtor. You:",opts:["A) Debit cash, credit debtors","B) Credit cash, debit debtors","C) Debit both","D) Credit both"],a:0,e:"Cash (asset) increases = Debit. Debtors (asset) decreases = Credit.",t:"Double Entry"},
+{q:"Gross profit equals:",opts:["A) Revenue minus all expenses","B) Revenue minus cost of goods sold","C) Revenue minus operating expenses","D) Net profit plus tax"],a:1,e:"Gross Profit = Revenue minus Cost of Goods Sold.",t:"Income Statement"},
+{q:"A trial balance checks that:",opts:["A) Profit is correct","B) All assets and liabilities shown","C) Debits equal credits","D) Depreciation is correct"],a:2,e:"Trial balance verifies mathematical accuracy. Total debits must equal total credits.",t:"Trial Balance"}
+],
+eng:[
+{q:"A simile:",opts:["A) Gives human qualities to things","B) Compares using like or as","C) Repeats sounds at start of words","D) Exaggerates for effect"],a:1,e:"A simile explicitly compares two things using the words like or as.",t:"Grammar"},
+{q:"In a summary you should:",opts:["A) Include all details","B) Use own words and main ideas only","C) Copy key sentences","D) Write in bullet points"],a:1,e:"Summaries must be in your own words and contain only the main ideas.",t:"Summary Writing"},
+{q:"An expository essay aims to:",opts:["A) Tell a story","B) Convince the reader","C) Describe vividly","D) Inform and explain objectively"],a:3,e:"Expository writing informs and explains facts and ideas clearly and objectively.",t:"Essay Writing"}
+],
+it:[
+{q:"RAM stands for:",opts:["A) Read Access Memory","B) Random Access Memory","C) Rapid Application Memory","D) Read Application Module"],a:1,e:"RAM = Random Access Memory, temporary storage for data being processed.",t:"Hardware"},
+{q:"A firewall is used to:",opts:["A) Speed up internet","B) Store backups","C) Protect network from unauthorised access","D) Compress files"],a:2,e:"A firewall monitors network traffic to protect against unauthorised access.",t:"Security"},
+{q:"A primary key:",opts:["A) Most important field","B) Uniquely identifies each record","C) First field in a table","D) Links two tables"],a:1,e:"A primary key uniquely identifies each record. No two records share the same primary key.",t:"Databases"}
+]
+};
+
+var QB_MAP={"Mathematics":"maths","Biology":"bio","Chemistry":"chem","Physics":"phys","Principles of Business":"pob","Principles of Accounts":"poa","English A":"eng","English Language (English A)":"eng","Information Technology":"it"};
+
+var NOTES={
+maths:{topics:[
+  {name:"Algebra",notes:[
+    {t:"Expanding and Factorising",b:"Use FOIL for double brackets. Always take out the common factor first. Difference of two squares: a squared minus b squared = (a+b)(a-b).",f:"(x+3)(x-2) = x squared + x - 6   |   x squared - 9 = (x+3)(x-3)"},
+    {t:"Quadratic Equations",b:"Factorise first. If you cannot, use the quadratic formula. Show full working every time.",f:"x = (-b plus/minus root of b squared minus 4ac) all over 2a"}
+  ]},
+  {name:"Geometry",notes:[
+    {t:"Circle Theorems",b:"5 key theorems: (1) Angle in semicircle = 90 degrees. (2) Angles subtended by same arc are equal. (3) Angle at centre = 2 times angle at circumference. (4) Opposite angles of cyclic quad add to 180 degrees. (5) Tangent-radius = 90 degrees. Always state the theorem name as your reason.",f:null},
+    {t:"Trigonometry and Pythagoras",b:"Pythagoras only works for right-angled triangles. For non-right triangles use the Sine Rule or Cosine Rule.",f:"SOH CAH TOA   |   a2+b2=c2   |   Sine Rule: a/sinA = b/sinB"}
+  ]},
+  {name:"Statistics",notes:[
+    {t:"Averages",b:"For grouped data use midpoints to estimate the mean. Always draw the frequency table first.",f:"Mean = sum of x divided by n   |   Median = middle value   |   Mode = most frequent"}
+  ]}
+]},
+bio:{topics:[
+  {name:"Cell Biology",notes:[
+    {t:"Plant vs Animal Cells",b:"Plant ONLY: cell wall (cellulose), chloroplasts, large central vacuole. Both have: nucleus, cell membrane, cytoplasm, mitochondria, ribosomes.",f:null},
+    {t:"Transport Across Membranes",b:"Diffusion: passive, high to low concentration. Osmosis: water only, through semi-permeable membrane. Active transport: against concentration gradient, requires ATP.",f:null}
+  ]},
+  {name:"Genetics",notes:[
+    {t:"Mendelian Genetics",b:"Genotype (e.g. Tt) vs Phenotype (e.g. Tall). Always draw the full Punnett square and state both ratios clearly.",f:"Tt x Tt gives TT:Tt:tt = 1:2:1   |   Phenotype ratio: 3 Tall to 1 short"}
+  ]}
+]},
+chem:{topics:[
+  {name:"The Mole",notes:[{t:"Mole Calculations",b:"1 mole = 6.02 x 10 to the 23 particles. Always check units.",f:"Moles = Mass divided by Molar Mass   |   Moles = Volume in dm3 divided by 24 at RTP"}]},
+  {name:"Acids and Bases",notes:[{t:"Neutralisation",b:"Acids produce H+ ions (pH less than 7). Bases produce OH- (pH greater than 7). Neutralisation always gives salt and water.",f:"Acid + Base gives Salt + Water   |   HCl + NaOH gives NaCl + H2O"}]}
+]},
+phys:{topics:[
+  {name:"Mechanics",notes:[
+    {t:"Equations of Motion",b:"Applies only to uniform acceleration. Identify u, v, a, s, t before choosing an equation.",f:"v=u+at   |   s=ut+(1/2)at2   |   v2=u2+2as   |   F=ma"},
+    {t:"Newtons Laws",b:"1st: no net force means constant velocity. 2nd: F=ma. 3rd: every action has an equal and opposite reaction.",f:"F = ma   (Newtons = kg x m per s squared)"}
+  ]},
+  {name:"Electricity",notes:[{t:"Ohms Law and Circuits",b:"Series: same current throughout. Parallel: same voltage across each branch.",f:"V=IR   |   P=IV=I2R   |   Series: R=R1+R2   |   Parallel: 1/R=1/R1+1/R2"}]}
+]},
+eng:{topics:[
+  {name:"Comprehension",notes:[{t:"Strategy",b:"1) Read passage twice. 2) Underline key words in questions. 3) Locate answer in passage. 4) Rephrase in your own words, never copy full sentences. 5) Answer in complete sentences.",f:null}]},
+  {name:"Essay Writing",notes:[
+    {t:"Structure using TEEL",b:"Introduction: hook + context + thesis. Body (TEEL): Topic sentence, Explanation, Evidence, Link. Conclusion: restate thesis in new words and summarise. No new information in conclusion.",f:null},
+    {t:"Summary Writing",b:"Main ideas only. Your own words. Continuous prose. Count words carefully. No examples or details.",f:null}
+  ]}
+]},
+pob:{topics:[{name:"Business",notes:[
+  {t:"Forms of Organisation",b:"Sole Trader: 1 owner, unlimited liability. Partnership: 2 to 20, Partnership Deed. Private Ltd: limited liability. PLC: shares on stock exchange. Co-op: one member one vote.",f:"Unlimited liability = personal assets at risk   |   Limited = only lose investment"},
+  {t:"The 4 Ps",b:"Product: quality, brand, lifecycle. Price: penetration or skimming or competitive. Place: direct or retailer or wholesaler or online. Promotion: advertising, PR, social media.",f:null}
+]}]},
+poa:{topics:[{name:"Accounts",notes:[
+  {t:"DEAD CLIC",b:"Every transaction has one debit and one equal credit. The accounts must always balance.",f:"Debit: Expenses Assets Drawings   |   Credit: Liabilities Income Capital"},
+  {t:"Financial Statements",b:"Income Statement heading must include: Business Name, Income Statement, For the year ended date.",f:"Gross Profit = Revenue minus COGS   |   Net Profit = Gross Profit minus Expenses   |   Assets = Liabilities + Capital"}
+]}]},
+"cp-pm":{topics:[{name:"Calculus",notes:[
+  {t:"Differentiation",b:"Find the gradient or rate of change. Chain rule for composite functions. Show all steps.",f:"d/dx of xn = nxn-1   |   d/dx of sinx = cosx   |   d/dx of ex = ex   |   Chain rule: dy/dx = dy/du times du/dx"},
+  {t:"Integration",b:"Reverse of differentiation. Always add constant C for indefinite integrals. Definite integral = area under the curve.",f:"Integral of xn dx = xn+1 over (n+1) plus C   |   Integration by parts: integral of u dv = uv minus integral of v du"}
+]}]},
+"cp-econ":{topics:[{name:"Economics",notes:[
+  {t:"Demand Supply and Elasticity",b:"Draw and label ALL diagrams. Missing labels lose marks. Market structures range from perfect competition (price taker) to monopoly (price maker).",f:"PED = percentage change in Qd divided by percentage change in P   |   PED greater than 1 = elastic"},
+  {t:"National Income",b:"Three methods: expenditure, income, output. All give the same result. Caribbean context: small open economies, tourism dependence.",f:"GDP = C + I + G + (X minus M)   |   Real GDP adjusts for inflation"}
+]}]},
+"cp-cs":{topics:[{name:"Caribbean Society",notes:[
+  {t:"Creolisation and Caribbean Identity",b:"Caribbean identity shaped by colonialism, slavery, indentureship, migration and creolisation. Key thinkers: Fanon (colonialism), Stuart Hall (diaspora), CLR James (political economy). Creolisation = cultural synthesis, not mere mixing.",f:null},
+  {t:"Development Theories",b:"Modernisation (Rostow): linear stages. Dependency theory: underdevelopment from exploitation. HDI: health + education + income. Know CARICOM institutions, achievements and limitations.",f:"HDI = health index + education index + income index (scale 0 to 1)"}
+]}]}
+};
+ALL_S.forEach(function(s){if(!NOTES[s.id])NOTES[s.id]={topics:[{name:"Overview",notes:[{t:s.n+" Study Guide",b:"Key topics: "+s.topics.join(", ")+"."+(s.units?" Units: "+s.units.join("; ")+".":" ")+s.tips.join(". ")+".",f:null}]}]};});
+
+var TRACKER={
+csec:{
+  Mathematics:[{yr:"2024",t:["Algebra","Consumer Arithmetic","Geometry"],h:["Algebra","Consumer Arithmetic"]},{yr:"2023",t:["Statistics","Trigonometry","Sets"],h:["Trigonometry"]},{yr:"2022",t:["Number Theory","Algebra","Coordinates"],h:["Algebra"]},{yr:"2021",t:["Consumer Arithmetic","Statistics","Geometry"],h:["Consumer Arithmetic"]},{yr:"2020",t:["Algebra","Trigonometry","Probability"],h:["Algebra","Trigonometry"]}],
+  Biology:[{yr:"2024",t:["Cell Biology","Genetics","Ecology"],h:["Genetics"]},{yr:"2023",t:["Transport","Reproduction","Nutrition"],h:["Transport"]},{yr:"2022",t:["Cell Biology","Excretion","Ecology"],h:["Cell Biology"]},{yr:"2021",t:["Genetics","Reproduction","Respiration"],h:["Genetics"]},{yr:"2020",t:["Ecology","Transport","Cell Biology"],h:["Ecology"]}],
+  Chemistry:[{yr:"2024",t:["The Mole","Organic","Acids and Bases"],h:["The Mole"]},{yr:"2023",t:["Electrochemistry","Atomic Structure","Bonding"],h:["Electrochemistry"]},{yr:"2022",t:["Organic","The Mole","Salts"],h:["The Mole"]},{yr:"2021",t:["Acids and Bases","Bonding","Kinetics"],h:["Acids and Bases"]},{yr:"2020",t:["The Mole","Electrochemistry","Organic"],h:["The Mole"]}],
+  "English A":[{yr:"2024",t:["Summary","Expository","Comprehension"],h:["Expository"]},{yr:"2023",t:["Narrative","Comprehension","Argumentative"],h:["Comprehension"]},{yr:"2022",t:["Descriptive","Summary","Comprehension"],h:["Summary"]},{yr:"2021",t:["Expository","Comprehension","Letters"],h:["Comprehension"]},{yr:"2020",t:["Argumentative","Summary","Report"],h:["Argumentative"]}],
+  "Principles of Business":[{yr:"2024",t:["Marketing Mix","Business Types","Trade"],h:["Marketing Mix"]},{yr:"2023",t:["Management","Finance","Production"],h:["Management"]},{yr:"2022",t:["Business Org","Marketing","Trade"],h:["Marketing"]},{yr:"2021",t:["Entrepreneurship","Finance","Marketing Mix"],h:["Marketing Mix"]},{yr:"2020",t:["Management","Business Types","Trade"],h:["Management"]}]
+},
+cape:{
+  "Pure Mathematics":[{yr:"2024",t:["Calculus","Complex Numbers","Series"],h:["Calculus"]},{yr:"2023",t:["Integration","DEs","Vectors"],h:["Integration"]},{yr:"2022",t:["Differentiation","Complex Numbers","Matrices"],h:["Differentiation"]},{yr:"2021",t:["Calculus","Sequences","Trig"],h:["Calculus"]},{yr:"2020",t:["Integration","Complex Numbers","Binomial"],h:["Integration"]}],
+  "Caribbean Studies":[{yr:"2024",t:["Development","Identity","Environment"],h:["Development"]},{yr:"2023",t:["CARICOM","Creolisation","Governance"],h:["CARICOM"]},{yr:"2022",t:["Identity","Development Theories","Migration"],h:["Development Theories"]},{yr:"2021",t:["Caribbean Economy","Social Issues","Culture"],h:["Caribbean Economy"]},{yr:"2020",t:["Development","CARICOM","Gender"],h:["Development","CARICOM"]}],
+  Economics:[{yr:"2024",t:["Market Failure","Monetary Policy","Trade"],h:["Monetary Policy"]},{yr:"2023",t:["Elasticity","National Income","Fiscal Policy"],h:["Elasticity","National Income"]},{yr:"2022",t:["Market Structures","GDP","Trade"],h:["Market Structures"]},{yr:"2021",t:["Demand and Supply","Macro Policy","Development"],h:["Macro Policy"]},{yr:"2020",t:["Elasticity","Market Failure","Trade"],h:["Elasticity"]}]
+}
+};
+
+var FREE_SITES=[
+{n:"CXC Past Paper Online",url:"https://cxcpastpaper.online",d:"Largest free archive. CSEC and CAPE papers, mark schemes, no sign-up."},
+{n:"CXC Past Papers Org",url:"https://cxcpastpapers.org",d:"Clean interface for CSEC papers. Free, no account required."},
+{n:"CXC Study Bank",url:"https://studybank.web.app",d:"Community-hosted CSEC and CAPE papers. Simple and free."},
+{n:"CSEC Papers Blog",url:"https://cxctutor.blogspot.com/p/download-section.html",d:"Community archive of CSEC papers across many subjects and years."}
+];
+
+var CSEC_SUBJS=["Mathematics","English Language (English A)","Biology","Chemistry","Physics","Human and Social Biology","Principles of Business","Principles of Accounts","Social Studies","Geography","History","Information Technology","Economics","Caribbean History","Agricultural Science","Food and Nutrition","Integrated Science","Office Administration","Spanish","French"];
+var CAPE_SUBJS=["Pure Mathematics","Applied Mathematics","Biology","Chemistry","Physics","Economics","Accounting","Management of Business","Caribbean Studies","Communication Studies","Literatures in English","History","Geography","Computer Science","Sociology","Law","Environmental Science","Spanish","French"];
+
+var TUTOR_SUGG={
+csec:["Explain the mole concept","How to write a CSEC essay","Photosynthesis vs Respiration","What is CARICOM?","Types of business organisations","How to draw a Balance Sheet","Explain Ohms Law","What is the quadratic formula?"],
+cape:["Differentiate x cubed times sin x","Explain integration by parts","Explain the lac operon","Types of market failure","CAPE expository essay structure","CVP analysis example","What is creolisation?","National income accounting methods"]
+};
+
+// ── NAVIGATION ───────────────────────────────────────────────
+document.querySelectorAll(".nb").forEach(function(btn){
+  btn.addEventListener("click",function(){
+    var tab=this.dataset.tab;
+    document.querySelectorAll(".pg").forEach(function(p){p.classList.remove("on");});
+    document.querySelectorAll(".nb").forEach(function(b){b.classList.remove("on");});
+    document.getElementById("pg-"+tab).classList.add("on");
+    this.classList.add("on");
+  });
+});
+
+// ── AI ───────────────────────────────────────────────────────
+function callAI(prompt,max,cb){
+  max=max||2000;
+  var PROXY="https://cxc-proxy.onrender.com";
+  fetch(PROXY,{
+    method:"POST",
+    headers:{"Content-Type":"application/json"},
+    body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:max,messages:[{role:"user",content:prompt}]})
+  })
+  .then(function(r){
+    if(!r.ok){return r.text().then(function(t){throw new Error("Server "+r.status+": "+t.slice(0,200));});}
+    return r.json();
+  })
+  .then(function(d){
+    if(d.error){cb(new Error(JSON.stringify(d.error)));return;}
+    if(!d.content){cb(new Error("No content in response"));return;}
+    cb(null,d.content.map(function(x){return x.text||"";}).join(""));
+  })
+  .catch(function(e){cb(e);});
+}
+
+function el(id){return document.getElementById(id);}
+function ce(tag,attrs,inner){var e=document.createElement(tag);if(attrs)Object.keys(attrs).forEach(function(k){e[k]=attrs[k];});if(inner!==undefined)e.innerHTML=inner;return e;}
+
+// ── SUBJECTS ─────────────────────────────────────────────────
+var subjCat="all";
+var CAT_NAMES={science:"Science and Maths",humanities:"Humanities",business:"Business",language:"Language and Literature",technology:"Technology"};
+
+function buildSubjects(){
+  var pills=el("spills");
+  ["all","science","humanities","business","language","technology"].forEach(function(c){
+    var b=ce("button","","pill"+(c==="all"?" on":""),"",c==="all"?"All":CAT_NAMES[c]);
+    b=document.createElement("button");
+    b.className="pill"+(c==="all"?" on":"");
+    b.textContent=c==="all"?"All":CAT_NAMES[c];
+    b.dataset.cat=c;
+    b.addEventListener("click",function(){
+      subjCat=this.dataset.cat;
+      document.querySelectorAll("#spills .pill").forEach(function(p){p.classList.remove("on");});
+      this.classList.add("on");
+      renderSubjects();
+    });
+    pills.appendChild(b);
+  });
+  renderSubjects();
+}
+
+function renderSubjects(){
+  var cont=el("scont");
+  cont.innerHTML="";
+  var cats={science:[],humanities:[],business:[],language:[],technology:[]};
+  ALL_S.forEach(function(s){if(subjCat==="all"||s.cat===subjCat)cats[s.cat].push(s);});
+  ["science","humanities","business","language","technology"].forEach(function(cat){
+    if(!cats[cat].length) return;
+    var lbl=document.createElement("div");lbl.className="cl";lbl.textContent=CAT_NAMES[cat];cont.appendChild(lbl);
+    var grid=document.createElement("div");grid.className="grid";
+    cats[cat].forEach(function(s){
+      var card=document.createElement("div");card.className="sc";card.dataset.id=s.id;card.dataset.level=s.level;
+      card.innerHTML='<div class="si'+(s.level==="cape"?" cp":"")+'">'+(s.i||s.n.charAt(0))+'</div>'+
+        '<div class="sn2">'+s.n+'</div><div class="sd">'+s.d+'</div>'+
+        '<span class="tag '+(s.level==="cape"?"tp":"tg")+'">'+(s.level==="cape"?"CAPE":"CSEC")+'</span>';
+      card.addEventListener("click",function(){openModal(s.id,s.level);});
+      grid.appendChild(card);
+    });
+    cont.appendChild(grid);
+  });
+}
+
+// ── MODAL ────────────────────────────────────────────────────
+var mSel=null;var mTab="overview";
+function openModal(id,level){
+  var list=level==="cape"?CAPE:CSEC;
+  mSel=null;list.forEach(function(s){if(s.id===id)mSel=Object.assign({},s,{level:level});});
+  if(!mSel)return;
+  mTab="overview";
+  renderModal();
+  el("moverlay").classList.add("on");
+}
+
+el("moverlay").addEventListener("click",function(e){if(e.target===el("moverlay"))el("moverlay").classList.remove("on");});
+
+function renderModal(){
+  var s=mSel;
+  var tabs=["overview","papers"];
+  if(s.units)tabs.push("units");
+  tabs.push("tips");
+  var html='<button class="mc" id="mc-btn">×</button>'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:3px;">'+s.n+'</div>'+
+    '<div style="font-size:12px;color:#666;margin-bottom:12px;">'+s.d+'</div>'+
+    '<div style="display:flex;gap:2px;border-bottom:2px solid #eee;margin-bottom:12px;">'+
+    tabs.map(function(t){return '<button class="mt'+(mTab===t?" on":"")+'" data-mtab="'+t+'">'+t.charAt(0).toUpperCase()+t.slice(1)+'</button>';}).join("")+
+    '</div><div id="mbody">'+getModalBody()+'</div>';
+  el("mbox").innerHTML=html;
+  el("mc-btn").addEventListener("click",function(){el("moverlay").classList.remove("on");});
+  el("mbox").querySelectorAll(".mt").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      mTab=this.dataset.mtab;
+      el("mbox").querySelectorAll(".mt").forEach(function(b){b.classList.remove("on");});
+      this.classList.add("on");
+      el("mbody").innerHTML=getModalBody();
+    });
+  });
+}
+
+function getModalBody(){
+  var s=mSel;
+  if(mTab==="overview"){
+    return '<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(0,1fr));gap:5px;margin-bottom:12px;">'+
+      s.papers.map(function(p){return '<div class="card2" style="text-align:center;"><div style="font-size:11px;font-weight:700;color:#00c896;">'+p.split("-")[0].replace("Paper ","P")+'</div><div style="font-size:10px;color:#666;">'+(p.split("-")[1]||"").trim()+'</div></div>';}).join("")+
+      '</div><div>'+s.topics.map(function(t){return '<span class="tag tg" style="margin-right:4px;margin-bottom:4px;">'+t+'</span>';}).join("")+'</div>';
+  }
+  if(mTab==="papers"){
+    return '<div style="background:#e8f8f3;border-radius:7px;padding:8px;font-size:12px;color:#00c896;margin-bottom:10px;">Direct links to '+s.n+' papers on free sites</div>'+
+      [["CXC Past Paper Online","Free - All years - Mark schemes",s.url||"https://cxcpastpaper.online"],
+       ["CXC Past Papers Org","Free - No account","https://cxcpastpapers.org"],
+       ["CXC Study Bank","Free - Community archive","https://studybank.web.app"]]
+      .map(function(r){return '<div class="prow"><div><div style="font-size:12px;font-weight:700;">'+r[0]+'</div><div style="font-size:10px;color:#666;">'+r[1]+'</div></div><a href="'+r[2]+'" target="_blank" class="olink">Open</a></div>';}).join("");
+  }
+  if(mTab==="units"){
+    return (s.units||[]).map(function(u,i){return '<div class="card2" style="font-size:12px;margin-bottom:5px;"><strong style="color:#7c3aed;">Unit '+(i+1)+':</strong> '+(u.split(":")[1]||u).trim()+'</div>';}).join("");
+  }
+  if(mTab==="tips"){
+    return s.tips.map(function(tip){return '<div style="display:flex;gap:8px;font-size:13px;margin-bottom:7px;"><span style="color:#00c896;flex-shrink:0;">→</span><span>'+tip+'</span></div>';}).join("");
+  }
+  return "";
+}
+
+// ── NOTES ────────────────────────────────────────────────────
+var nSel=null;var nTi=0;
+function buildNotesSidebar(){
+  var sb=el("nsb");
+  var h1=document.createElement("div");h1.className="sbh";h1.textContent="CSEC";sb.appendChild(h1);
+  CSEC.forEach(function(s){
+    var d=document.createElement("div");d.className="sbi";d.dataset.id=s.id;d.dataset.level="csec";
+    d.innerHTML='<div class="ico">'+(s.i||s.n.charAt(0))+'</div><span>'+s.n+'</span>';
+    d.addEventListener("click",function(){loadNotes(s.id,"csec");});
+    sb.appendChild(d);
+  });
+  var h2=document.createElement("div");h2.className="sbh";h2.textContent="CAPE";sb.appendChild(h2);
+  CAPE.forEach(function(s){
+    var d=document.createElement("div");d.className="sbi";d.dataset.id=s.id;d.dataset.level="cape";
+    d.innerHTML='<div class="ico cp">'+(s.i||s.n.charAt(0))+'</div><span>'+s.n+'</span>';
+    d.addEventListener("click",function(){loadNotes(s.id,"cape");});
+    sb.appendChild(d);
+  });
+}
+
+function loadNotes(id,level){
+  var list=level==="cape"?CAPE:CSEC;
+  nSel=null;list.forEach(function(s){if(s.id===id)nSel=Object.assign({},s,{level:level});});
+  if(!nSel)return;
+  nTi=0;
+  document.querySelectorAll(".sbi").forEach(function(b){b.classList.toggle("on",b.dataset.id===id);});
+  renderNotesMain();
+}
+
+function renderNotesMain(){
+  var s=nSel;var nd=NOTES[s.id];if(!nd)return;
+  var main=el("nmain");
+  main.innerHTML='<div style="margin-bottom:11px;"><div style="font-size:14px;font-weight:700;margin-bottom:2px;">'+s.n+' <span class="tag '+(s.level==="cape"?"tp":"tg")+'">'+s.level.toUpperCase()+'</span></div><div style="font-size:11px;color:#666;">'+s.d+'</div></div>'+
+    '<div style="margin-bottom:11px;">'+nd.topics.map(function(tp,i){return '<button class="pill'+(nTi===i?" on":"")+'" data-nti="'+i+'">'+tp.name+'</button>';}).join("")+'</div>'+
+    '<div id="ncards">'+getNoteCards()+'</div>';
+  main.querySelectorAll("[data-nti]").forEach(function(btn){
+    btn.addEventListener("click",function(){
+      nTi=parseInt(this.dataset.nti);
+      main.querySelectorAll("[data-nti]").forEach(function(b){b.classList.remove("on");});
+      this.classList.add("on");
+      el("ncards").innerHTML=getNoteCards();
+    });
+  });
+}
+
+function getNoteCards(){
+  var s=nSel;var nd=NOTES[s.id];if(!nd||!nd.topics[nTi])return "";
+  return nd.topics[nTi].notes.map(function(note,ni){
+    return '<div class="card" id="nc'+ni+'">'+
+      '<div style="font-size:13px;font-weight:700;margin-bottom:6px;">'+note.t+'</div>'+
+      '<div style="font-size:12px;line-height:1.7;color:#444;margin-bottom:6px;">'+note.b+'</div>'+
+      (note.f?'<div class="fbox">'+note.f+'</div>':'')+
+      '<button class="btng" style="font-size:11px;margin-top:6px;" data-ni="'+ni+'">🤖 Explain More</button>'+
+      '<div id="ar'+ni+'"></div></div>';
+  }).join("");
+}
+
+el("nmain").addEventListener("click",function(e){
+  var btn=e.target.closest("[data-ni]");
+  if(!btn)return;
+  var ni=parseInt(btn.dataset.ni);
+  var nd=NOTES[nSel.id];
+  var note=nd.topics[nTi].notes[ni];
+  btn.disabled=true;btn.textContent="Loading...";
+  var res=el("ar"+ni);
+  res.innerHTML='<div class="spin"></div>';
+  callAI("You are a CXC "+nSel.level.toUpperCase()+" tutor. Explain the topic called "+note.t+" in the subject "+nSel.n+" for a Caribbean student. Include key concepts, a worked example if relevant, and a common exam mistake. Maximum 200 words. Plain text only, no markdown.",700,function(err,txt){
+    if(err||!txt){res.innerHTML='<div style="color:#ef4444;font-size:12px;margin-top:6px;">'+(err&&err.message||"Error")+'</div>';btn.disabled=false;btn.textContent="🤖 Explain More";return;}
+    res.innerHTML='<div class="card2" style="font-size:12px;line-height:1.7;margin-top:6px;">'+txt.split("\n").map(function(p){return p.trim()?'<p style="margin-bottom:3px;">'+p+'</p>':'';}).join("")+'</div>';
+    btn.textContent="Done";
+  });
+});
+
+// ── QUIZ ─────────────────────────────────────────────────────
+var qMode="bank";var qData=[];var qCur=0;var qScore=0;var qSel=null;var qAnswers=[];var qWrongs=[];
+
+el("mb-bank").addEventListener("click",function(){
+  qMode="bank";
+  el("mb-bank").classList.add("on");el("mb-ai").classList.remove("on");
+  el("bank-note").style.display="block";el("aiopts").style.display="none";
+});
+el("mb-ai").addEventListener("click",function(){
+  qMode="ai";
+  el("mb-ai").classList.add("on");el("mb-bank").classList.remove("on");
+  el("bank-note").style.display="none";el("aiopts").style.display="block";
+});
+
+function buildQLevel(){
+  var sel=el("qlevel");
+  sel.innerHTML='<option value="csec">CSEC</option><option value="cape">CAPE</option>';
+  sel.addEventListener("change",updateQSubjs);
+  updateQSubjs();
+}
+
+function updateQSubjs(){
+  var level=el("qlevel").value;
+  var subjs=level==="csec"?CSEC_SUBJS:CAPE_SUBJS;
+  el("qsubj").innerHTML='<option value="">-- Select Subject --</option>'+subjs.map(function(s){return '<option>'+s+'</option>';}).join("");
+}
+
+el("startbtn").addEventListener("click",function(){
+  var subj=el("qsubj").value;var cnt=parseInt(el("qcnt").value);var level=el("qlevel").value;
+  if(!subj){alert("Please select a subject.");return;}
+  if(qMode==="bank"){
+    var key=QB_MAP[subj];var bank=key?QB[key]:null;
+    if(!bank||!bank.length){
+      if(confirm("No built-in questions for this subject. Switch to AI mode?")){el("mb-ai").click();}
+      return;
+    }
+    var sh=bank.slice().sort(function(){return 0.5-Math.random();});
+    qData=sh.slice(0,Math.min(cnt,sh.length));
+    runQuiz();
+  }else{
+    el("qsetup").style.display="none";
+    el("qactive").style.display="block";
+    el("qactive").innerHTML='<div class="card" style="text-align:center;padding:36px;"><div class="spin"></div><div style="font-size:12px;color:#666;">Generating AI questions... (10-20 seconds)</div></div>';
+    var diff=el("qdiff").value;var topic=el("qtopic").value;
+    var prompt="You are a CXC "+level.toUpperCase()+" examiner for "+subj+". Generate exactly "+cnt+" multiple-choice questions at "+diff+" level."+(topic?" Focus on: "+topic+".":" ")+"Return ONLY a JSON array with this format: [{q: question text, opts: [A option, B option, C option, D option], a: correct index 0-3, e: explanation, t: topic name}]";
+    callAI(prompt,4000,function(err,raw){
+      if(err){alert("AI Error: "+(err.message||err));resetQuiz();return;}
+      try{
+        var clean=raw;
+        var s2=raw.indexOf("[");var e2=raw.lastIndexOf("]");if(s2>=0&&e2>s2)clean=raw.slice(s2,e2+1);
+        qData=JSON.parse(clean);
+        runQuiz();
+      }catch(ex){alert("Failed to parse questions. Please try again.");resetQuiz();}
+    });
+  }
+});
+
+function runQuiz(){
+  qCur=0;qScore=0;qSel=null;qAnswers=[];qWrongs=[];
+  el("qsetup").style.display="none";el("qresults").style.display="none";el("qactive").style.display="block";
+  renderQ();
+}
+
+function renderQ(){
+  var q=qData[qCur];var pct=Math.round((qCur/qData.length)*100);
+  var html='<div class="pbar-w"><div class="pbar" style="width:'+pct+'%"></div></div>'+
+    '<div style="display:flex;justify-content:space-between;margin-bottom:12px;">'+
+    '<span style="font-size:11px;color:#666;">Q'+(qCur+1)+' of '+qData.length+(q.t?' - '+q.t:'')+'</span>'+
+    '<span class="tag tg">Score: '+qScore+'</span></div>'+
+    '<div class="card" style="margin-bottom:10px;">'+
+    '<div style="font-size:14px;font-weight:700;margin-bottom:12px;line-height:1.5;">'+q.q+'</div><div>'+
+    q.opts.map(function(opt,i){
+      var cls="qo"+(qSel!==null?(i===q.a?" ok":(i===qSel&&i!==q.a?" ng":""))+(qSel!==null?" dis":""):"");
+      return '<div class="'+cls+'" data-i="'+i+'"><div class="oc">'+"ABCD"[i]+'</div>'+opt.replace(/^[A-D]\)\s*/,"")+'</div>';
+    }).join("")+'</div>'+
+    (qSel!==null?'<div class="card2" style="margin-top:9px;font-size:12px;border-color:#22c55e;"><strong style="color:#22c55e;">Explanation: </strong>'+q.e+'</div>':'')+
+    '</div><div style="display:flex;gap:8px;">'+
+    '<button class="btng" id="endbtn">End</button>'+
+    '<button class="btn" id="nxtbtn" '+(qSel===null?'disabled style="opacity:.4"':'')+'>'+
+    (qCur===qData.length-1?"See Results":"Next")+'</button></div>';
+  el("qactive").innerHTML=html;
+  el("qactive").querySelectorAll(".qo").forEach(function(d){
+    d.addEventListener("click",function(){
+      if(qSel!==null)return;
+      qSel=parseInt(this.dataset.i);
+      var q2=qData[qCur];
+      qAnswers.push({q:q2.q,chosen:qSel,correct:q2.a,opts:q2.opts,e:q2.e});
+      if(qSel!==q2.a)qWrongs.push(q2);
+      if(qSel===q2.a)qScore++;
+      renderQ();
+    });
+  });
+  var nb=el("nxtbtn");if(nb)nb.addEventListener("click",function(){if(qCur+1>=qData.length){showQResults();}else{qCur++;qSel=null;renderQ();}});
+  var eb=el("endbtn");if(eb)eb.addEventListener("click",function(){if(qAnswers.length>0)showQResults();else resetQuiz();});
+}
+
+function showQResults(){
+  el("qactive").style.display="none";el("qresults").style.display="block";
+  var total=qData.length;var pct=Math.round((qScore/total)*100);
+  var html='<div style="width:76px;height:76px;border-radius:50%;border:3px solid #00c896;background:#e8f8f3;margin:0 auto 12px;display:flex;flex-direction:column;align-items:center;justify-content:center;">'+
+    '<div style="font-size:19px;font-weight:700;color:#00c896;">'+pct+'%</div>'+
+    '<div style="font-size:10px;color:#666;">'+qScore+'/'+total+'</div></div>'+
+    '<div style="font-size:15px;font-weight:700;margin-bottom:4px;">'+(pct>=80?"Excellent!":pct>=60?"Good effort!":pct>=40?"Keep going!":"More revision needed")+'</div>'+
+    '<div style="font-size:12px;color:#666;margin-bottom:14px;">'+(pct>=80?"On track for Grade I!":pct>=60?"Target weak topics.":pct>=40?"Review topics in Notes tab.":"Use Notes and AI Tutor.")+'</div>'+
+    '<div class="card" style="max-height:240px;overflow-y:auto;text-align:left;margin-bottom:12px;">'+
+    '<div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:#888;margin-bottom:7px;">Answer Review</div>'+
+    qAnswers.map(function(a,i){
+      return '<div style="padding:6px 0;border-bottom:1px solid #f0f0f0;">'+
+        '<div style="font-size:12px;margin-bottom:2px;"><strong>Q'+(i+1)+':</strong> '+a.q+'</div>'+
+        '<div style="font-size:11px;display:flex;gap:7px;flex-wrap:wrap;">'+
+        '<span style="color:'+(a.chosen===a.correct?"#15803d":"#b91c1c")+'">'+(a.chosen===a.correct?"Correct: ":"Wrong: ")+(a.opts[a.chosen]||"").replace(/^[A-D]\)\s*/,"")+'</span>'+
+        (a.chosen!==a.correct?'<span style="color:#15803d;">Correct: '+(a.opts[a.correct]||"").replace(/^[A-D]\)\s*/,"")+'</span>':'')+
+        '</div><div style="font-size:10px;color:#888;margin-top:1px;">'+a.e+'</div></div>';
+    }).join("")+'</div>'+
+    '<div style="display:flex;gap:8px;justify-content:center;">'+
+    '<button class="btng" id="newqbtn">New Quiz</button>'+
+    (qWrongs.length>0?'<button class="btn" id="retrybtn">Retry Wrong ('+qWrongs.length+')</button>':'')+
+    '</div>';
+  el("qresults").innerHTML=html;
+  var nb=el("newqbtn");if(nb)nb.addEventListener("click",resetQuiz);
+  var rb=el("retrybtn");if(rb)rb.addEventListener("click",function(){qData=qWrongs;qCur=0;qScore=0;qSel=null;qAnswers=[];qWrongs=[];el("qresults").style.display="none";el("qactive").style.display="block";renderQ();});
+}
+
+function resetQuiz(){el("qsetup").style.display="block";el("qactive").style.display="none";el("qresults").style.display="none";}
+
+// ── MOCK PAPERS ──────────────────────────────────────────────
+function buildMock(){
+  var msel=el("mlevel");
+  msel.innerHTML='<option value="csec">CSEC</option><option value="cape">CAPE</option>';
+  msel.addEventListener("change",updateMSubjs);
+  updateMSubjs();
+  el("genbtn").addEventListener("click",genMock);
+}
+
+function updateMSubjs(){
+  var level=el("mlevel").value;
+  var subjs=level==="csec"?["Mathematics","English A","Biology","Chemistry","Physics","Principles of Business","Principles of Accounts","Social Studies","Information Technology","Economics","Geography","History"]:["Pure Mathematics","Biology","Chemistry","Physics","Economics","Accounting","Management of Business","Caribbean Studies","Communication Studies"];
+  el("msubj").innerHTML='<option value="">-- Select --</option>'+subjs.map(function(s){return '<option>'+s+'</option>';}).join("");
+}
+
+var mockText="";
+function genMock(){
+  var level=el("mlevel").value;var subj=el("msubj").value;
+  if(!subj){alert("Select a subject.");return;}
+  el("mockout").innerHTML='<div class="card" style="text-align:center;padding:36px;"><div class="spin"></div><div style="font-size:12px;color:#666;">Generating mock paper... (15-25 seconds)</div></div>';
+  var prompt="You are a CXC "+level.toUpperCase()+" examiner. Write a complete realistic mock exam for "+level.toUpperCase()+" "+subj+". Include the exam title, time allowed, total marks, and general instructions at the top. Then write Section A with 10 multiple choice questions each with options A B C D. Then Section B with 3 structured questions with sub-parts labelled a b c and mark allocations in square brackets. Then Section C with 1 essay question with guidance notes. Format as plain text like a real CXC exam paper.";
+  callAI(prompt,3000,function(err,txt){
+    if(err||!txt){el("mockout").innerHTML='<div class="card" style="color:#ef4444;padding:18px;">Error: '+(err&&err.message||"empty response")+'</div>';return;}
+    mockText=txt;
+    el("mockout").innerHTML='<div style="display:flex;gap:8px;margin-bottom:10px;">'+
+      '<button class="btng" id="dlbtn">Download</button>'+
+      '<button class="btng" id="prbtn">Print</button>'+
+      '<button class="btng" id="newmbtn">New Paper</button></div>'+
+      '<div class="card" id="mpaper" style="font-family:monospace;font-size:12px;line-height:1.8;white-space:pre-wrap;max-height:62vh;overflow-y:auto;">'+txt+'</div>';
+    el("dlbtn").addEventListener("click",function(){
+      var b=new Blob([mockText],{type:"text/plain"});var u=URL.createObjectURL(b);
+      var a=document.createElement("a");a.href=u;a.download="CXC_Mock_Paper.txt";a.click();
+    });
+    el("prbtn").addEventListener("click",function(){window.print();});
+    el("newmbtn").addEventListener("click",function(){el("mockout").innerHTML="";});
+  });
+}
+
+// ── TRACKER ──────────────────────────────────────────────────
+function buildTracker(){
+  var lsel=el("tlevel");lsel.innerHTML='<option value="csec">CSEC</option><option value="cape">CAPE</option>';
+  lsel.addEventListener("change",function(){updateTSubjs();renderTracker();});
+  updateTSubjs();
+  el("tsubj").addEventListener("change",renderTracker);
+  renderTracker();
+}
+
+function updateTSubjs(){
+  var level=el("tlevel").value;var subjs=Object.keys(TRACKER[level]||{});
+  el("tsubj").innerHTML=subjs.map(function(s){return '<option>'+s+'</option>';}).join("");
+}
+
+function renderTracker(){
+  var level=el("tlevel").value;var subj=el("tsubj").value;
+  var data=(TRACKER[level]||{})[subj]||[];
+  if(!data.length){el("trout").innerHTML='<div class="card" style="color:#666;padding:18px;">No data for this subject yet.</div>';return;}
+  var allT=[];data.forEach(function(d){d.t.forEach(function(t){if(allT.indexOf(t)<0)allT.push(t);});});
+  var html='<table class="trtbl"><thead><tr><th>Year</th>'+allT.map(function(t){return '<th>'+t+'</th>';}).join("")+'<th>Hot Topics</th></tr></thead><tbody>'+
+    data.map(function(d){
+      return '<tr><td><strong>'+d.yr+'</strong></td>'+
+        allT.map(function(t){var a=d.t.indexOf(t)>=0;var h=d.h.indexOf(t)>=0;return '<td>'+(a?'<span class="'+(h?"hot":"app")+'">'+(h?"* ":"")+t+'</span>':"—")+'</td>';}).join("")+
+        '<td>'+d.h.map(function(t){return '<span class="hot" style="margin-right:3px;">'+t+'</span>';}).join("")+'</td></tr>';
+    }).join("")+'</tbody></table>';
+  el("trout").innerHTML=html;
+}
+
+// ── TUTOR ────────────────────────────────────────────────────
+var chatHist=[];
+function buildTutor(){
+  var lsel=el("tqlevel");lsel.innerHTML='<option value="csec">CSEC</option><option value="cape">CAPE</option>';
+  lsel.addEventListener("change",updateTSugg);
+  updateTSugg();
+  el("sendbtn").addEventListener("click",sendChat);
+  el("chatin").addEventListener("keydown",function(e){if(e.key==="Enter")sendChat();});
+  addMsg("bot","Hi! I am your CXC tutor for CSEC and CAPE. Ask me anything about any subject.");
+}
+
+function updateTSugg(){
+  var level=el("tqlevel").value;var sugg=TUTOR_SUGG[level];
+  var wrap=el("tsugg");wrap.innerHTML="";
+  sugg.forEach(function(s){
+    var b=document.createElement("button");b.className="pill";b.textContent=s;
+    b.addEventListener("click",function(){el("chatin").value=s;sendChat();});
+    wrap.appendChild(b);
+  });
+}
+
+function addMsg(role,text){
+  var box=el("chatbox");
+  var div=document.createElement("div");div.className="msg "+(role==="user"?"u":"b");
+  div.innerHTML='<div class="av">'+(role==="user"?"You":"AI")+'</div><div class="bub">'+
+    text.split("\n").map(function(p){return p.trim()?'<p style="margin-bottom:2px;">'+p+'</p>':'';}).join("")+'</div>';
+  box.appendChild(div);box.scrollTop=box.scrollHeight;
+}
+
+function sendChat(){
+  var inp=el("chatin");var msg=inp.value.trim();if(!msg)return;
+  inp.value="";addMsg("user",msg);chatHist.push({role:"user",content:msg});
+  var spin=document.createElement("div");spin.className="msg b";spin.id="typing";
+  spin.innerHTML='<div class="av">AI</div><div class="bub"><div class="spin" style="width:16px;height:16px;margin:3px auto;"></div></div>';
+  el("chatbox").appendChild(spin);el("chatbox").scrollTop=99999;
+  el("sendbtn").disabled=true;
+  var sys="You are an expert CXC tutor for Caribbean students covering CSEC and CAPE. Be clear and accurate. Use Caribbean examples. For CSEC: exam technique and key facts. For CAPE: higher-order analysis. Maximum 300 words. Plain text only, no markdown, no asterisks, no hashes. Use newlines between paragraphs.";
+  fetch("https://cxc-proxy.onrender.com",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:sys,messages:chatHist.slice(-10)})})
+    .then(function(r){return r.json();})
+    .then(function(d){
+      var reply=d.content.map(function(x){return x.text||"";}).join("");
+      chatHist.push({role:"assistant",content:reply});
+      var t=el("typing");if(t)t.remove();
+      addMsg("bot",reply);el("sendbtn").disabled=false;
+    }).catch(function(){var t=el("typing");if(t)t.remove();addMsg("bot","Something went wrong. Please try again.");el("sendbtn").disabled=false;});
+}
+
+// ── LINKS ────────────────────────────────────────────────────
+function buildLinks(){
+  el("lgrid").innerHTML=FREE_SITES.map(function(s){
+    return '<div class="card"><div style="font-size:13px;font-weight:700;margin-bottom:3px;">'+s.n+'</div>'+
+      '<div style="font-size:12px;color:#666;line-height:1.5;margin-bottom:9px;">'+s.d+'</div>'+
+      '<a href="'+s.url+'" target="_blank" class="btn" style="display:block;text-align:center;text-decoration:none;">Visit Site</a></div>';
+  }).join("");
+  el("tgrid").innerHTML=[
+    ["Start 3 months early","CSEC: 3 months before. CAPE: 4 months. Papers take longer at CAPE level."],
+    ["Mark scheme first","Read what examiners want before sitting the paper. Key words earn marks."],
+    ["Timed practice","Always practise under real exam conditions. Never do papers without a timer."],
+    ["Track weak topics","Log every wrong answer by topic and revisit the Notes tab for those areas."],
+    ["CAPE IA start now","Internal Assessment counts 20-25 percent per unit. Never leave it to the last month."],
+    ["Use the AI Tutor","Ask the Tutor tab anything. Free, unlimited, for both CSEC and CAPE."]
+  ].map(function(tip){
+    return '<div class="card"><div style="font-size:13px;font-weight:700;margin-bottom:3px;">'+tip[0]+'</div><div style="font-size:12px;color:#666;line-height:1.5;">'+tip[1]+'</div></div>';
+  }).join("");
+}
+
+// ── INIT ─────────────────────────────────────────────────────
+buildSubjects();
+buildNotesSidebar();
+buildQLevel();
+buildMock();
+buildTracker();
+buildTutor();
+buildLinks();
+
+
+
+// ── FIREBASE AUTH (Google Sign-In) ──────────────────────────
+var firebaseApp = null;
+var currentUser = null;
+
+function initFirebase() {
+  if (firebaseApp) return;
+  var script1 = document.createElement('script');
+  script1.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js';
+  script1.onload = function() {
+    var script2 = document.createElement('script');
+    script2.src = 'https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js';
+    script2.onload = function() {
+      var config = {
+        apiKey: "AIzaSyDemo-CXCHub-PublicKey",
+        authDomain: "cxchub-demo.firebaseapp.com",
+        projectId: "cxchub-demo"
+      };
+      try {
+        firebaseApp = firebase.initializeApp(config);
+        firebase.auth().onAuthStateChanged(function(user) {
+          if (user) {
+            currentUser = user;
+            onSignedIn(user);
+          } else {
+            currentUser = null;
+            onSignedOut();
+          }
+        });
+      } catch(e) {
+        // Firebase not configured - use local demo mode
+        checkLocalUser();
+      }
+    };
+    document.head.appendChild(script2);
+  };
+  document.head.appendChild(script1);
+}
+
+function checkLocalUser() {
+  var saved = localStorage.getItem('cxc_user');
+  if (saved) {
+    try {
+      var u = JSON.parse(saved);
+      currentUser = u;
+      onSignedIn(u);
+    } catch(e) {}
+  }
+}
+
+function signInGoogle() {
+  if (typeof firebase !== 'undefined' && firebase.auth) {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    firebase.auth().signInWithPopup(provider).catch(function(err) {
+      // Fallback to demo mode if Firebase not configured
+      demoSignIn();
+    });
+  } else {
+    demoSignIn();
+  }
+}
+
+function demoSignIn() {
+  // Demo mode - creates a local profile
+  var name = prompt('Enter your name to create a local profile:');
+  if (!name) return;
+  var user = {
+    displayName: name,
+    email: name.toLowerCase().replace(/\s/g,'') + '@student.local',
+    photoURL: null,
+    uid: 'local_' + Date.now(),
+    joinedDate: new Date().toLocaleDateString()
+  };
+  localStorage.setItem('cxc_user', JSON.stringify(user));
+  currentUser = user;
+  onSignedIn(user);
+  closeAuthModal();
+}
+
+function signOut() {
+  if (typeof firebase !== 'undefined' && firebase.auth && !currentUser.uid.startsWith('local_')) {
+    firebase.auth().signOut();
+  } else {
+    localStorage.removeItem('cxc_user');
+    currentUser = null;
+    onSignedOut();
+  }
+}
+
+function onSignedIn(user) {
+  var bar = document.getElementById('auth-bar');
+  var initials = (user.displayName || 'U').split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+  bar.innerHTML = '<span class="user-name">Hi, ' + (user.displayName || 'Student').split(' ')[0] + '!</span>' +
+    (user.photoURL ? '<img class="auth-avatar" src="' + user.photoURL + '"/>' : '<span style="background:#00c896;color:#000;width:26px;height:26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:10px;font-weight:700;">' + initials + '</span>') +
+    '<button onclick="switchToProfile()" style="color:#00c896;background:none;border:none;cursor:pointer;font-size:12px;">Profile</button>' +
+    '<span style="color:#555;">|</span>' +
+    '<a href="#" onclick="openPayPal();return false;" style="color:#ffc439;">♥ Support</a>';
+  renderProfile(user);
+}
+
+function onSignedOut() {
+  var bar = document.getElementById('auth-bar');
+  bar.innerHTML = '<span id="auth-status"><button onclick="openAuthModal()" style="color:#00c896;background:none;border:none;cursor:pointer;font-size:12px;">Sign In / Register</button><span style="color:#555;margin:0 6px;">|</span><a href="#" onclick="openPayPal();return false;" style="color:#ffc439;text-decoration:none;">♥ Support us</a></span>';
+  document.getElementById('profile-noauth').style.display = 'block';
+  document.getElementById('profile-auth').style.display = 'none';
+}
+
+function openAuthModal() {
+  initFirebase();
+  document.getElementById('auth-modal').classList.add('on');
+}
+
+function closeAuthModal() {
+  document.getElementById('auth-modal').classList.remove('on');
+}
+
+function switchToProfile() {
+  document.querySelectorAll('.pg').forEach(function(p){p.classList.remove('on');});
+  document.querySelectorAll('.nb').forEach(function(b){b.classList.remove('on');});
+  document.getElementById('pg-profile').classList.add('on');
+}
+
+// ── PAYPAL DONATE ────────────────────────────────────────────
+function openPayPal() {
+  // Opens PayPal donate page - replace YOUR_PAYPAL_EMAIL with your actual PayPal email
+  var paypalEmail = 'YOUR_PAYPAL_EMAIL@example.com';
+  var amount = '5.00';
+  var url = 'https://www.paypal.com/donate?business=' + encodeURIComponent(paypalEmail) +
+    '&amount=' + amount +
+    '&currency_code=USD' +
+    '&item_name=' + encodeURIComponent('CXC Study Hub - Support Students');
+  window.open(url, '_blank');
+}
+
+// ── QUIZ HISTORY & PROGRESS TRACKING ─────────────────────────
+function saveQuizResult(subject, score, total, level) {
+  var history = getQuizHistory();
+  var entry = {
+    subject: subject,
+    score: score,
+    total: total,
+    level: level || 'csec',
+    pct: Math.round((score/total)*100),
+    date: new Date().toLocaleDateString(),
+    ts: Date.now()
+  };
+  history.unshift(entry);
+  if (history.length > 50) history = history.slice(0, 50);
+  localStorage.setItem('cxc_history', JSON.stringify(history));
+  checkBadges(history);
+}
+
+function getQuizHistory() {
+  try { return JSON.parse(localStorage.getItem('cxc_history') || '[]'); } catch(e) { return []; }
+}
+
+function getStats() {
+  var h = getQuizHistory();
+  if (!h.length) return {quizzes:0,questions:0,correctPct:0,streak:0};
+  var totalQ = h.reduce(function(s,e){return s+e.total;},0);
+  var totalC = h.reduce(function(s,e){return s+e.score;},0);
+  var streak = calcStreak(h);
+  return {quizzes:h.length, questions:totalQ, correctPct:totalQ?Math.round(totalC/totalQ*100):0, streak:streak};
+}
+
+function calcStreak(history) {
+  if (!history.length) return 0;
+  var dates = {};
+  history.forEach(function(e){dates[e.date]=true;});
+  var streak = 0;
+  var d = new Date();
+  while(true) {
+    var key = d.toLocaleDateString();
+    if (!dates[key]) break;
+    streak++;
+    d.setDate(d.getDate()-1);
+  }
+  return streak;
+}
+
+function getSubjectProgress(history) {
+  var map = {};
+  history.forEach(function(e){
+    if(!map[e.subject]) map[e.subject]={total:0,correct:0,count:0};
+    map[e.subject].total += e.total;
+    map[e.subject].correct += e.score;
+    map[e.subject].count++;
+  });
+  return map;
+}
+
+function checkBadges(history) {
+  var badges = JSON.parse(localStorage.getItem('cxc_badges') || '[]');
+  var stats = getStats();
+  var earned = [];
+  if(stats.quizzes >= 1 && badges.indexOf('first_quiz') < 0) { badges.push('first_quiz'); earned.push('First Quiz!'); }
+  if(stats.quizzes >= 10 && badges.indexOf('quiz_10') < 0) { badges.push('quiz_10'); earned.push('10 Quizzes!'); }
+  if(stats.quizzes >= 50 && badges.indexOf('quiz_50') < 0) { badges.push('quiz_50'); earned.push('50 Quizzes!'); }
+  if(stats.correctPct >= 80 && stats.quizzes >= 5 && badges.indexOf('high_scorer') < 0) { badges.push('high_scorer'); earned.push('High Scorer!'); }
+  if(stats.streak >= 3 && badges.indexOf('streak_3') < 0) { badges.push('streak_3'); earned.push('3-Day Streak!'); }
+  if(stats.streak >= 7 && badges.indexOf('streak_7') < 0) { badges.push('streak_7'); earned.push('7-Day Streak!'); }
+  var subjects = getSubjectProgress(history);
+  if(Object.keys(subjects).length >= 5 && badges.indexOf('multi_subject') < 0) { badges.push('multi_subject'); earned.push('Multi-Subject!'); }
+  localStorage.setItem('cxc_badges', JSON.stringify(badges));
+  if (earned.length) showBadgeToast(earned[0]);
+}
+
+function showBadgeToast(text) {
+  var t = document.createElement('div');
+  t.style.cssText = 'position:fixed;bottom:20px;right:20px;background:#1a1a2e;color:#00c896;padding:12px 18px;border-radius:10px;font-weight:700;font-size:13px;z-index:999;box-shadow:0 4px 12px rgba(0,0,0,.3);';
+  t.textContent = '🏆 Badge earned: ' + text;
+  t.innerHTML = '🏆 Badge earned: <strong>' + text + '</strong>';
+  document.body.appendChild(t);
+  setTimeout(function(){t.remove();}, 3500);
+}
+
+function renderProfile(user) {
+  document.getElementById('profile-noauth').style.display = 'none';
+  document.getElementById('profile-auth').style.display = 'block';
+  var initials = (user.displayName || 'U').split(' ').map(function(w){return w[0];}).join('').toUpperCase().slice(0,2);
+  document.getElementById('prof-initials').textContent = initials;
+  document.getElementById('prof-name').textContent = user.displayName || 'Student';
+  document.getElementById('prof-email').textContent = user.email || '';
+  document.getElementById('prof-joined').textContent = 'Member since ' + (user.joinedDate || new Date().toLocaleDateString());
+  if (user.photoURL) {
+    document.getElementById('prof-avatar').src = user.photoURL;
+    document.getElementById('prof-avatar').style.display = 'block';
+    document.getElementById('prof-initials').style.display = 'none';
+  }
+  var stats = getStats();
+  document.getElementById('stat-quizzes').textContent = stats.quizzes;
+  document.getElementById('stat-questions').textContent = stats.questions;
+  document.getElementById('stat-correct').textContent = stats.correctPct + '%';
+  document.getElementById('stat-streak').textContent = stats.streak;
+  renderBadges();
+  renderSubjectProgress();
+  renderQuizHistory();
+}
+
+function renderBadges() {
+  var badges = JSON.parse(localStorage.getItem('cxc_badges') || '[]');
+  var ALL_BADGES = [
+    {id:'first_quiz',label:'First Quiz',icon:'🎯',cls:'green',desc:'Complete your first quiz'},
+    {id:'quiz_10',label:'10 Quizzes',icon:'💪',cls:'blue',desc:'Complete 10 quizzes'},
+    {id:'quiz_50',label:'50 Quizzes',icon:'🌟',cls:'gold',desc:'Complete 50 quizzes'},
+    {id:'high_scorer',label:'High Scorer',icon:'🏆',cls:'gold',desc:'Average 80%+ over 5 quizzes'},
+    {id:'streak_3',label:'3-Day Streak',icon:'🔥',cls:'green',desc:'Study 3 days in a row'},
+    {id:'streak_7',label:'7-Day Streak',icon:'🔥',cls:'gold',desc:'Study 7 days in a row'},
+    {id:'multi_subject',label:'Multi-Subject',icon:'📚',cls:'blue',desc:'Study 5 different subjects'}
+  ];
+  var el = document.getElementById('badges-list');
+  el.innerHTML = ALL_BADGES.map(function(b) {
+    var earned = badges.indexOf(b.id) >= 0;
+    return '<span class="badge ' + (earned ? b.cls : '') + '" style="' + (earned ? '' : 'opacity:.35;filter:grayscale(1);') + '" title="' + b.desc + '">' + b.icon + ' ' + b.label + '</span>';
+  }).join('');
+  if (!badges.length) el.innerHTML += '<div style="font-size:12px;color:#999;margin-top:8px;">Complete quizzes to earn badges!</div>';
+}
+
+function renderSubjectProgress() {
+  var history = getQuizHistory();
+  var progress = getSubjectProgress(history);
+  var el = document.getElementById('subject-progress');
+  var subjects = Object.keys(progress);
+  if (!subjects.length) { el.innerHTML = '<div style="font-size:12px;color:#999;">No quiz data yet. Take a quiz to see progress!</div>'; return; }
+  el.innerHTML = subjects.slice(0,8).map(function(s) {
+    var p = progress[s];
+    var pct = Math.round(p.correct/p.total*100);
+    return '<div style="margin-bottom:10px;">'+
+      '<div style="display:flex;justify-content:space-between;font-size:12px;margin-bottom:3px;">'+
+      '<span style="font-weight:600;">'+s+'</span>'+
+      '<span style="color:' + (pct>=80?'#15803d':pct>=60?'#b45309':'#b91c1c') + ';">' + pct + '% ('+p.count+' quiz'+(p.count!==1?'es':'')+')</span>'+
+      '</div><div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%;background:'+(pct>=80?'#00c896':pct>=60?'#f59e0b':'#ef4444')+'"></div></div></div>';
+  }).join('');
+}
+
+function renderQuizHistory() {
+  var history = getQuizHistory().slice(0, 10);
+  var el = document.getElementById('quiz-history');
+  if (!history.length) { el.innerHTML = '<div style="font-size:12px;color:#999;">No quizzes taken yet.</div>'; return; }
+  el.innerHTML = history.map(function(e) {
+    return '<div class="history-item">'+
+      '<div><div style="font-size:13px;font-weight:700;">'+e.subject+'</div>'+
+      '<div style="font-size:11px;color:#666;">'+e.date+' · '+e.level.toUpperCase()+'</div></div>'+
+      '<div style="text-align:right;"><div style="font-size:15px;font-weight:700;color:'+(e.pct>=80?'#15803d':e.pct>=60?'#b45309':'#b91c1c')+'">'+e.pct+'%</div>'+
+      '<div style="font-size:11px;color:#666;">'+e.score+'/'+e.total+'</div></div></div>';
+  }).join('');
+}
+
+// Hook into quiz results to save them
+var _origShowQResults = showQResults;
+showQResults = function() {
+  _origShowQResults();
+  var subj = document.getElementById('qsubj') ? document.getElementById('qsubj').value : 'Unknown';
+  var level = document.getElementById('qlevel') ? document.getElementById('qlevel').value : 'csec';
+  saveQuizResult(subj, qScore, qData.length, level);
+  if (currentUser) renderProfile(currentUser);
+};
+
+// Init auth on load
+initFirebase();
+
+// ── PAYWALL ──────────────────────────────────────────────────
+// CONFIG: Set your PayPal email and access codes here
+var PAYPAL_EMAIL = 'nabiyah_bi@hotmail.com';
+var PAYPAL_AMOUNT = '10.99';
+var PAYPAL_CURRENCY = 'USD';
+
+// Access codes - add as many as you want.
+// Each code can only be used once per device.
+// Generate codes like: CXC-2024-XXXX where XXXX is random letters
+var ACCESS_CODES = [
+  'CXC-2025-XAJI-0Y6D',
+  'CXC-2025-PBHS-AHXT',
+  'CXC-2025-HV3A-3ZMF',
+  'CXC-2025-8MDD-4V30',
+  'CXC-2025-T9NT-3W5U',
+  'CXC-2025-ZBIK-CIDK',
+  'CXC-2025-WNNH-J7XV',
+  'CXC-2025-G0FN-9XUY',
+  'CXC-2025-41IB-LJH7',
+  'CXC-2025-5LXO-6QJI',
+  'CXC-2025-UJV6-OH9S',
+  'CXC-2025-DBDW-2PCN',
+  'CXC-2025-9T84-AZYT',
+  'CXC-2025-JXEP-Q85J',
+  'CXC-2025-SG65-KXVF',
+  'CXC-2025-1T2T-ALA7',
+  'CXC-2025-53LC-58DR',
+  'CXC-2025-C11E-RTJ5',
+  'CXC-2025-PHT0-HL9X',
+  'CXC-2025-PSEI-MVIH',
+  'CXC-2025-CWI6-4CIY',
+  'CXC-2025-HE7U-R23G',
+  'CXC-2025-DPPQ-0Y9D',
+  'CXC-2025-OM5I-GQPK',
+  'CXC-2025-I7P5-TB94',
+  'CXC-2025-874F-RHOC',
+  'CXC-2025-N9J2-QP89',
+  'CXC-2025-UZFK-8UT0',
+  'CXC-2025-CVS4-F8CG',
+  'CXC-2025-VYIE-6IVW',
+  'CXC-2025-PVS7-HZIO',
+  'CXC-2025-YKL1-CQ99',
+  'CXC-2025-CHJ7-55NF',
+  'CXC-2025-4ZW9-XA3K',
+  'CXC-2025-X7EE-DTJV',
+  'CXC-2025-ZHWJ-R64D',
+  'CXC-2025-PJA1-WJ0T',
+  'CXC-2025-PAC5-6T4U',
+  'CXC-2025-FEL6-246H',
+  'CXC-2025-ID25-OWF7',
+  'CXC-2025-5935-A0L7',
+  'CXC-2025-253J-2D54',
+  'CXC-2025-I3QK-2IAG',
+  'CXC-2025-L58K-XO9T',
+  'CXC-2025-7E8G-8JDP',
+  'CXC-2025-0LVS-NUJZ',
+  'CXC-2025-A7TZ-0YNC',
+  'CXC-2025-XLL4-ZKLO',
+  'CXC-2025-OKEP-7Y6W',
+  'CXC-2025-KTAK-PUXQ',
+];
+
+var TRIAL_QUESTIONS = 3;
+
+function makeBannerHTML(n) {
+  var msg = 'TRIAL MODE — ' + n + ' free questions remaining.';
+  return msg;
+}
+
+function showPaywall() {
+  var pw = document.getElementById('paywall');
+  pw.style.display = 'flex';
+  pw.style.opacity = '1';
+  document.body.style.overflow = 'hidden';
+}
+
+var trialUsed = 0;
+var isTrialMode = false;
+
+function checkAccess() {
+  // Check if already unlocked on this device
+  var unlocked = localStorage.getItem('cxc_unlocked');
+  if (unlocked === 'true') {
+    hidePaywall();
+    return;
+  }
+  // Show paywall
+  document.getElementById('paywall').style.display = 'flex';
+  // Block keyboard on hidden content
+  document.body.style.overflow = 'hidden';
+}
+
+function hidePaywall() {
+  var pw = document.getElementById('paywall');
+  pw.style.opacity = '0';
+  pw.style.transition = 'opacity 0.4s';
+  setTimeout(function() { pw.style.display = 'none'; }, 400);
+  document.body.style.overflow = '';
+}
+
+function goToPayPal() {
+  var url = 'https://www.paypal.com/donate?business=' + encodeURIComponent(PAYPAL_EMAIL) +
+    '&amount=' + PAYPAL_AMOUNT +
+    '&currency_code=' + PAYPAL_CURRENCY +
+    '&item_name=' + encodeURIComponent('CXC Study Hub - Lifetime Access') + '&amount=10.99' +
+    '&return=' + encodeURIComponent(window.location.href + '?paid=1');
+  window.open(url, '_blank');
+  // Show instructions after opening PayPal
+  setTimeout(function() {
+    document.querySelector('.unlock-section p').textContent = 'After paying, check your email for your access code and enter it below:';
+    document.getElementById('unlock-input').focus();
+  }, 1500);
+}
+
+function tryUnlock() {
+  var code = document.getElementById('unlock-input').value.trim().toUpperCase();
+  var err = document.getElementById('unlock-err');
+  err.style.display = 'none';
+
+  if (!code) {
+    err.textContent = 'Please enter an access code.';
+    err.style.display = 'block';
+    return;
+  }
+
+  // Check if code is valid
+  var validCode = false;
+  for (var i = 0; i < ACCESS_CODES.length; i++) {
+    if (ACCESS_CODES[i].toUpperCase() === code) {
+      validCode = true;
+      break;
+    }
+  }
+
+  if (validCode) {
+    // Save to localStorage so they don't need to enter again
+    localStorage.setItem('cxc_unlocked', 'true');
+    localStorage.setItem('cxc_unlock_code', code);
+    localStorage.setItem('cxc_unlock_date', new Date().toLocaleDateString());
+    // Success animation
+    var btn = document.querySelector('.unlock-btn');
+    btn.textContent = 'Unlocked!';
+    btn.style.background = '#22c55e';
+    setTimeout(function() { hidePaywall(); }, 800);
+  } else {
+    err.textContent = 'Invalid code. Please check your email or contact support@cxchub.com';
+    err.style.display = 'block';
+    document.getElementById('unlock-input').style.borderColor = '#ef4444';
+    setTimeout(function() {
+      document.getElementById('unlock-input').style.borderColor = '#e0e0e0';
+    }, 2000);
+  }
+}
+
+// Allow Enter key on unlock input
+document.addEventListener('DOMContentLoaded', function() {
+  var inp = document.getElementById('unlock-input');
+  if (inp) {
+    inp.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') tryUnlock();
+    });
+  }
+  // Check URL param from PayPal return
+  if (window.location.search.indexOf('paid=1') >= 0) {
+    document.querySelector('.unlock-section p').textContent = 'Payment received! Check your email for your access code:';
+    document.getElementById('unlock-input').focus();
+  }
+});
+
+function startTrial() {
+  isTrialMode = true;
+  trialUsed = 0;
+  hidePaywall();
+  // Show trial banner
+  var banner = document.createElement('div');
+  banner.id = 'trial-banner';
+  banner.style.cssText = 'background:#fef3c7;color:#92400e;text-align:center;padding:8px;font-size:12px;font-weight:600;position:sticky;top:50px;z-index:90;';
+  // banner innerHTML removed
+  document.body.insertBefore(banner, document.body.children[1]);
+}
+
+function checkTrialLimit() {
+  if (!isTrialMode) return true;
+  if (trialUsed >= TRIAL_QUESTIONS) {
+    // Show paywall again
+    document.getElementById('paywall').style.display = 'flex';
+    document.getElementById('paywall').style.opacity = '1';
+    document.body.style.overflow = 'hidden';
+    // Update paywall message
+    document.querySelector('.price-tag .period').textContent = 'Trial ended. Unlock full access below.';
+    return false;
+  }
+  return true;
+}
+
+// Hook into quiz start to check trial
+var _origStartBtn = null;
+document.addEventListener('DOMContentLoaded', function() {
+  var sb = document.getElementById('startbtn');
+  if (sb) {
+    sb.addEventListener('click', function() {
+      if (isTrialMode) {
+        if (!checkTrialLimit()) return;
+      }
+    }, true); // capture phase - fires before other listeners
+  }
+});
+
+// Hook into quiz results to count trial questions
+var _origSaveResult = saveQuizResult;
+saveQuizResult = function(subject, score, total, level) {
+  if (isTrialMode) {
+    trialUsed += total;
+    var banner = document.getElementById('trial-banner');
+    var remaining = Math.max(0, TRIAL_QUESTIONS - trialUsed);
+  // banner innerHTML removed
+  }
+  _origSaveResult(subject, score, total, level);
+};
+
+// Run access check immediately
+checkAccess();
+
+
+</script>
+
+<div id="pg-profile" class="pg">
+  <div class="profile-page">
+    <div id="profile-noauth" style="text-align:center;padding:40px;">
+      <div style="font-size:48px;margin-bottom:14px;">&#128100;</div>
+      <div style="font-size:18px;font-weight:700;margin-bottom:8px;">Your Study Profile</div>
+      <div style="font-size:13px;color:#666;margin-bottom:20px;">Sign in to track your quiz scores, study streaks, and progress across all subjects.</div>
+      <button class="btn" onclick="openAuthModal()">Sign In / Register</button>
+    </div>
+    <div id="profile-auth" style="display:none;">
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:20px;background:#fff;border-radius:12px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+        <img id="prof-avatar" src="" style="width:56px;height:56px;border-radius:50%;border:3px solid #00c896;display:none;"/>
+        <div id="prof-initials" style="width:56px;height:56px;border-radius:50%;background:#00c896;color:#000;display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:700;flex-shrink:0;"></div>
+        <div>
+          <div id="prof-name" style="font-size:17px;font-weight:700;"></div>
+          <div id="prof-email" style="font-size:12px;color:#666;"></div>
+          <div id="prof-joined" style="font-size:11px;color:#aaa;margin-top:2px;"></div>
+        </div>
+        <button class="btng" style="margin-left:auto;font-size:11px;" onclick="signOut()">Sign Out</button>
+      </div>
+
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-bottom:20px;">
+        <div class="stat-card"><div class="big" id="stat-quizzes">0</div><div class="lbl2">Quizzes taken</div></div>
+        <div class="stat-card"><div class="big" id="stat-questions">0</div><div class="lbl2">Questions answered</div></div>
+        <div class="stat-card"><div class="big" id="stat-correct">0%</div><div class="lbl2">Correct answers</div></div>
+        <div class="stat-card"><div class="big" id="stat-streak">0</div><div class="lbl2">Day streak</div></div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+        <div style="font-size:14px;font-weight:700;margin-bottom:12px;">&#127942; Badges Earned</div>
+        <div id="badges-list"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;padding:16px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+        <div style="font-size:14px;font-weight:700;margin-bottom:12px;">&#128202; Subject Progress</div>
+        <div id="subject-progress"></div>
+      </div>
+
+      <div style="background:#fff;border-radius:10px;padding:16px;box-shadow:0 1px 4px rgba(0,0,0,.08);">
+        <div style="font-size:14px;font-weight:700;margin-bottom:12px;">&#128336; Recent Quiz History</div>
+        <div id="quiz-history"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- AUTH MODAL -->
+<div class="auth-modal" id="auth-modal">
+  <div class="auth-box">
+    <div style="font-size:32px;margin-bottom:8px;">&#127891;</div>
+    <h2>Join CXC Hub</h2>
+    <p>Sign in to track your progress, save quiz scores, and earn badges.</p>
+    <button class="google-btn" onclick="signInGoogle()">
+      <svg width="20" height="20" viewBox="0 0 48 48"><path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.6 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.1 6.5 29.4 4 24 4 12.9 4 4 12.9 4 24s8.9 20 20 20 20-8.9 20-20c0-1.3-.1-2.7-.4-3.9z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.5 15.7 18.9 12 24 12c3.1 0 5.8 1.1 7.9 2.9l5.7-5.7C34.1 6.5 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.3 35.4 26.8 36 24 36c-5.2 0-9.5-3.3-11.2-7.9l-6.5 5C9.6 39.5 16.3 44 24 44z"/><path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-.9 2.4-2.5 4.4-4.6 5.8l6.2 5.2C36.9 39 44 34 44 24c0-1.3-.1-2.7-.4-3.9z"/></svg>
+      Continue with Google
+    </button>
+    <div style="font-size:11px;color:#aaa;margin-bottom:14px;">or</div>
+    <button class="pp-btn" onclick="openPayPal()">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 2.72a.77.77 0 0 1 .76-.65h6.816c2.25 0 3.836.468 4.71 1.39.824.866 1.008 2.1.546 3.67l-.007.02c-.638 2.19-1.76 3.318-3.34 3.857-.523.178-1.09.28-1.7.31H9.847l-.747 4.85a.641.641 0 0 1-.633.54H7.076v4.63z"/></svg>
+      Donate via PayPal
+    </button>
+    <div style="margin-top:14px;"><button onclick="closeAuthModal()" style="background:none;border:none;color:#aaa;font-size:12px;cursor:pointer;">Maybe later</button></div>
+  </div>
+</div>
+
+</body>
+</html>
