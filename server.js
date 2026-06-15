@@ -1,6 +1,6 @@
 const https = require("https");
 
-const API_KEY = "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";
+const API_KEY = "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";
 
 function handleRequest(req, res) {
   res.setHeader("Access-Control-Allow-Origin", "*");
