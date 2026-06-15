@@ -1,0 +1,12 @@
+{
+  "name": "cxc-proxy",
+  "version": "1.0.0",
+  "description": "Proxy server for CXC Study Hub",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
