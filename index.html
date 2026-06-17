@@ -140,6 +140,13 @@ select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-
 
 .footer{background:#1a1a2e;color:#aaa;text-align:center;padding:18px;font-size:12px;margin-top:30px;border-top:2px solid #00c896;}
 .footer span{color:#00c896;font-weight:700;}
+
+.mmg-btn{display:flex;align-items:center;justify-content:center;gap:10px;background:#00813f;border:none;border-radius:10px;padding:14px 20px;font-size:15px;font-weight:700;cursor:pointer;width:100%;color:#fff;margin-bottom:10px;transition:opacity .2s;}
+.mmg-btn:hover{opacity:.9;}
+.mmg-info{background:#e8f5ee;border:1px solid #00813f;border-radius:8px;padding:10px 14px;font-size:12px;color:#00813f;margin-bottom:10px;display:none;text-align:left;line-height:1.8;}
+.mmg-info strong{color:#005a2c;}
+.or-divider{display:flex;align-items:center;gap:10px;margin:8px 0;color:#aaa;font-size:12px;}
+.or-divider::before,.or-divider::after{content:"";flex:1;height:1px;background:#e0e0e0;}
 </style>
 </head>
 <body>
@@ -169,6 +176,21 @@ select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-
         <svg width="24" height="24" viewBox="0 0 24 24" fill="#003087"><path d="M7.076 21.337H2.47a.641.641 0 0 1-.633-.74L4.944 2.72a.77.77 0 0 1 .76-.65h6.816c2.25 0 3.836.468 4.71 1.39.824.866 1.008 2.1.546 3.67l-.007.02c-.638 2.19-1.76 3.318-3.34 3.857-.523.178-1.09.28-1.7.31H9.847l-.747 4.85a.641.641 0 0 1-.633.54H7.076v4.63z"/></svg>
         Pay $10.99 with PayPal
       </button>
+      <div class="or-divider">or</div>
+      <button class="mmg-btn" id="mmg-toggle">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12.01" y2="18"/></svg>
+        Pay $3,000 GYD with Mobile Money Guyana
+      </button>
+      <div class="mmg-info" id="mmg-info">
+        <strong>Mobile Money Guyana (MMG) Instructions:</strong><br>
+        1. Open your MMG app<br>
+        2. Select <strong>Send Money</strong><br>
+        3. Enter number: <strong>592-627-1084</strong><br>
+        4. Amount: <strong>$3,000 GYD</strong><br>
+        5. Reference: <strong>CXC Access</strong><br>
+        6. Send payment and email proof to <strong>sfn_misu@yahoo.com</strong><br>
+        7. You will receive your access code within 24 hours
+      </div>
       <div class="unlock-section">
         <p>Already paid? Enter your access code below.</p>
         <div class="unlock-row">
@@ -182,7 +204,7 @@ select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-
       </div>
     </div>
     <div class="paywall-footer">
-      Secure payment via PayPal &bull; Instant access after payment &bull; sfn_misu@yahoo.com
+      PayPal (USD) &bull; Mobile Money Guyana &bull; sfn_misu@yahoo.com
     </div>
   </div>
 </div>
@@ -197,6 +219,7 @@ select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-
 <nav>
   <span class="logo">SFN</span>
   <button class="nb on" data-tab="subjects">Subjects</button>
+  <button class="nb" data-tab="papers">Papers</button>
   <button class="nb" data-tab="notes">Notes</button>
   <button class="nb" data-tab="quiz">Quiz</button>
   <button class="nb" data-tab="mock">Mock Papers</button>
@@ -219,6 +242,37 @@ select,input[type=text]{width:100%;padding:7px 9px;border:1px solid #ddd;border-
   <div id="spills" style="margin-bottom:12px;"></div>
   <div id="scont"></div>
 </div>
+
+<div id="pg-papers" class="pg">
+  <div style="font-size:15px;font-weight:700;margin-bottom:4px;">Free Past Papers</div>
+  <div style="font-size:12px;color:#666;margin-bottom:16px;">Direct links to every CSEC and CAPE subject. All free, no sign-up required. Click any subject to open its papers.</div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin-bottom:8px;">CSEC Subjects</div>
+  <div id="csec-papers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:20px;"></div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin-bottom:8px;">CAPE Subjects</div>
+  <div id="cape-papers-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:8px;margin-bottom:20px;"></div>
+
+  <div style="font-size:11px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#888;margin-bottom:8px;">Top Free Sites</div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:8px;">
+    <div class="card" style="text-align:center;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">CXC Past Paper Online</div>
+      <div style="font-size:11px;color:#666;margin-bottom:8px;">Largest archive. CSEC and CAPE. Mark schemes included.</div>
+      <a href="https://cxcpastpaper.online" target="_blank" class="btn" style="display:block;text-decoration:none;">Browse All Papers</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">CXC Past Papers Org</div>
+      <div style="font-size:11px;color:#666;margin-bottom:8px;">Clean interface. CSEC papers. No account needed.</div>
+      <a href="https://cxcpastpapers.org" target="_blank" class="btn" style="display:block;text-decoration:none;">Browse All Papers</a>
+    </div>
+    <div class="card" style="text-align:center;">
+      <div style="font-size:13px;font-weight:700;margin-bottom:4px;">CXC Study Bank</div>
+      <div style="font-size:11px;color:#666;margin-bottom:8px;">Community archive. CSEC and CAPE. Simple and free.</div>
+      <a href="https://studybank.web.app" target="_blank" class="btn" style="display:block;text-decoration:none;">Browse All Papers</a>
+    </div>
+  </div>
+</div>
+
 <div id="pg-notes" class="pg">
   <div class="split">
     <div class="sb" id="nsb"></div>
@@ -352,6 +406,48 @@ var CAPE=[
 ];
 
 var ALL_S = CSEC.map(function(s){return Object.assign({},s,{level:"csec"});}).concat(CAPE.map(function(s){return Object.assign({},s,{level:"cape"});}));
+
+var PAPER_LINKS = {
+  "maths":["https://cxcpastpaper.online/csec-mathematics-past-papers/","https://cxcpastpapers.org/csec-mathematics/","https://studybank.web.app"],
+  "bio":["https://cxcpastpaper.online/csec-biology-past-papers/","https://cxcpastpapers.org/csec-biology/","https://studybank.web.app"],
+  "chem":["https://cxcpastpaper.online/csec-chemistry-past-papers/","https://cxcpastpapers.org/csec-chemistry/","https://studybank.web.app"],
+  "phys":["https://cxcpastpaper.online/csec-physics-past-papers/","https://cxcpastpapers.org/csec-physics/","https://studybank.web.app"],
+  "hsb":["https://cxcpastpaper.online/csec-human-and-social-biology-past-papers/","https://cxcpastpapers.org/csec-human-social-biology/","https://studybank.web.app"],
+  "ints":["https://cxcpastpaper.online/csec-integrated-science-past-papers/","https://cxcpastpapers.org/csec-integrated-science/","https://studybank.web.app"],
+  "agri":["https://cxcpastpaper.online/csec-agricultural-science-past-papers/","https://cxcpastpapers.org/csec-agricultural-science/","https://studybank.web.app"],
+  "social":["https://cxcpastpaper.online/csec-social-studies-past-papers/","https://cxcpastpapers.org/csec-social-studies/","https://studybank.web.app"],
+  "hist":["https://cxcpastpaper.online/csec-history-past-papers/","https://cxcpastpapers.org/csec-history/","https://studybank.web.app"],
+  "geo":["https://cxcpastpaper.online/csec-geography-past-papers/","https://cxcpastpapers.org/csec-geography/","https://studybank.web.app"],
+  "caribhist":["https://cxcpastpaper.online/csec-caribbean-history-past-papers/","https://cxcpastpapers.org/csec-caribbean-history/","https://studybank.web.app"],
+  "pob":["https://cxcpastpaper.online/csec-principles-of-business-past-papers/","https://cxcpastpapers.org/csec-principles-of-business/","https://studybank.web.app"],
+  "poa":["https://cxcpastpaper.online/csec-principles-of-accounts-past-papers/","https://cxcpastpapers.org/csec-principles-of-accounts/","https://studybank.web.app"],
+  "econ":["https://cxcpastpaper.online/csec-economics-past-papers/","https://cxcpastpapers.org/csec-economics/","https://studybank.web.app"],
+  "offadm":["https://cxcpastpaper.online/csec-office-administration-past-papers/","https://cxcpastpapers.org/csec-office-administration/","https://studybank.web.app"],
+  "eng":["https://cxcpastpaper.online/csec-english-a-past-papers/","https://cxcpastpapers.org/csec-english-a/","https://studybank.web.app"],
+  "engb":["https://cxcpastpaper.online/csec-english-b-past-papers/","https://cxcpastpapers.org/csec-english-b/","https://studybank.web.app"],
+  "span":["https://cxcpastpaper.online/csec-spanish-past-papers/","https://cxcpastpapers.org/csec-spanish/","https://studybank.web.app"],
+  "fren":["https://cxcpastpaper.online/csec-french-past-papers/","https://cxcpastpapers.org/csec-french/","https://studybank.web.app"],
+  "it":["https://cxcpastpaper.online/csec-information-technology-past-papers/","https://cxcpastpapers.org/csec-information-technology/","https://studybank.web.app"],
+  "edpm":["https://cxcpastpaper.online/csec-edpm-past-papers/","https://cxcpastpapers.org/csec-edpm/","https://studybank.web.app"],
+  "food":["https://cxcpastpaper.online/csec-food-and-nutrition-past-papers/","https://cxcpastpapers.org/csec-food-nutrition/","https://studybank.web.app"],
+  "cp-pm":["https://cxcpastpaper.online/cape-pure-mathematics-past-papers/","https://cxcpastpapers.org/cape-pure-mathematics/","https://studybank.web.app"],
+  "cp-am":["https://cxcpastpaper.online/cape-applied-mathematics-past-papers/","https://cxcpastpapers.org/cape-applied-mathematics/","https://studybank.web.app"],
+  "cp-bio":["https://cxcpastpaper.online/cape-biology-past-papers/","https://cxcpastpapers.org/cape-biology/","https://studybank.web.app"],
+  "cp-chem":["https://cxcpastpaper.online/cape-chemistry-past-papers/","https://cxcpastpapers.org/cape-chemistry/","https://studybank.web.app"],
+  "cp-phys":["https://cxcpastpaper.online/cape-physics-past-papers/","https://cxcpastpapers.org/cape-physics/","https://studybank.web.app"],
+  "cp-env":["https://cxcpastpaper.online/cape-environmental-science-past-papers/","https://cxcpastpapers.org/cape-environmental-science/","https://studybank.web.app"],
+  "cp-agri":["https://cxcpastpaper.online/cape-agricultural-science-past-papers/","https://cxcpastpapers.org/cape-agricultural-science/","https://studybank.web.app"],
+  "cp-econ":["https://cxcpastpaper.online/cape-economics-past-papers/","https://cxcpastpapers.org/cape-economics/","https://studybank.web.app"],
+  "cp-acc":["https://cxcpastpaper.online/cape-accounting-past-papers/","https://cxcpastpapers.org/cape-accounting/","https://studybank.web.app"],
+  "cp-mob":["https://cxcpastpaper.online/cape-management-of-business-past-papers/","https://cxcpastpapers.org/cape-management-of-business/","https://studybank.web.app"],
+  "cp-cs":["https://cxcpastpaper.online/cape-caribbean-studies-past-papers/","https://cxcpastpapers.org/cape-caribbean-studies/","https://studybank.web.app"],
+  "cp-hist":["https://cxcpastpaper.online/cape-history-past-papers/","https://cxcpastpapers.org/cape-history/","https://studybank.web.app"],
+  "cp-geo":["https://cxcpastpaper.online/cape-geography-past-papers/","https://cxcpastpapers.org/cape-geography/","https://studybank.web.app"],
+  "cp-law":["https://cxcpastpaper.online/cape-law-past-papers/","https://cxcpastpapers.org/cape-law/","https://studybank.web.app"],
+  "cp-soc":["https://cxcpastpaper.online/cape-sociology-past-papers/","https://cxcpastpapers.org/cape-sociology/","https://studybank.web.app"],
+  "cp-comm":["https://cxcpastpaper.online/cape-communication-studies-past-papers/","https://cxcpastpapers.org/cape-communication-studies/","https://studybank.web.app"],
+  "cp-lit":["https://cxcpastpaper.online/cape-literatures-in-english-past-papers/","https://cxcpastpapers.org/cape-literatures-in-english/","https://studybank.web.app"],
+};
 
 var QB={
 maths:[
@@ -626,11 +722,16 @@ function getModalBody(){
       '</div><div>'+s.topics.map(function(t){return '<span class="tag tg" style="margin-right:4px;margin-bottom:4px;">'+t+'</span>';}).join("")+'</div>';
   }
   if(mTab==="papers"){
-    return '<div style="background:#e8f8f3;border-radius:7px;padding:8px;font-size:12px;color:#00c896;margin-bottom:10px;">Direct links to '+s.n+' papers on free sites</div>'+
-      [["CXC Past Paper Online","Free - All years - Mark schemes",s.url||"https://cxcpastpaper.online"],
-       ["CXC Past Papers Org","Free - No account","https://cxcpastpapers.org"],
-       ["CXC Study Bank","Free - Community archive","https://studybank.web.app"]]
-      .map(function(r){return '<div class="prow"><div><div style="font-size:12px;font-weight:700;">'+r[0]+'</div><div style="font-size:10px;color:#666;">'+r[1]+'</div></div><a href="'+r[2]+'" target="_blank" class="olink">Open</a></div>';}).join("");
+    var links = PAPER_LINKS[s.id] || [s.url||"https://cxcpastpaper.online","https://cxcpastpapers.org","https://studybank.web.app"];
+    var srcs = [
+      {name:"CXC Past Paper Online", note:"Free - All years - Mark schemes", url:links[0]},
+      {name:"CXC Past Papers Org",   note:"Free - No account required",      url:links[1]},
+      {name:"CXC Study Bank",        note:"Free - Community archive",         url:links[2]}
+    ];
+    return '<div style="background:#e8f8f3;border-radius:7px;padding:8px 10px;font-size:12px;color:#00813f;margin-bottom:10px;"><strong>3 free sources</strong> for '+s.n+' past papers. All free, no sign-up needed.</div>'+
+      srcs.map(function(r){
+        return '<div class="prow"><div><div style="font-size:12px;font-weight:700;">'+r.name+'</div><div style="font-size:10px;color:#666;">'+r.note+'</div><div style="font-size:10px;color:#00c896;margin-top:1px;">'+r.url.replace("https://","").split("/")[0]+'</div></div><a href="'+r.url+'" target="_blank" class="olink">Open &#8599;</a></div>';
+      }).join("");
   }
   if(mTab==="units"){
     return (s.units||[]).map(function(u,i){return '<div class="card2" style="font-size:12px;margin-bottom:5px;"><strong style="color:#7c3aed;">Unit '+(i+1)+':</strong> '+(u.split(":")[1]||u).trim()+'</div>';}).join("");
@@ -979,6 +1080,7 @@ buildMock();
 buildTracker();
 buildTutor();
 buildLinks();
+buildPapersPage();
 
 
 
@@ -1273,6 +1375,41 @@ showQResults = function() {
   if (currentUser) renderProfile(currentUser);
 };
 
+
+function buildPapersPage() {
+  var csecGrid = el("csec-papers-grid");
+  var capeGrid = el("cape-papers-grid");
+  if (!csecGrid || !capeGrid) return;
+
+  CSEC.forEach(function(s) {
+    var links = PAPER_LINKS[s.id] || ["https://cxcpastpaper.online"];
+    var card = document.createElement("div");
+    card.className = "card";
+    card.style.cssText = "cursor:pointer;text-align:center;padding:12px 8px;";
+    card.innerHTML = '<div style="width:32px;height:32px;border-radius:7px;background:#e8f8f3;color:#00c896;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;margin:0 auto 7px;">' + s.i + '</div>' +
+      '<div style="font-size:12px;font-weight:700;margin-bottom:6px;">' + s.n + '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:4px;">' +
+      [["CXCPastPaper", links[0]], ["PastPapers.org", links[1]], ["StudyBank", links[2]]].map(function(src) {
+        return '<a href="' + src[1] + '" target="_blank" style="background:#00c896;color:#000;border-radius:5px;padding:3px 0;font-size:10px;font-weight:700;text-decoration:none;display:block;">' + src[0] + ' &#8599;</a>';
+      }).join("") + '</div>';
+    csecGrid.appendChild(card);
+  });
+
+  CAPE.forEach(function(s) {
+    var links = PAPER_LINKS[s.id] || ["https://cxcpastpaper.online"];
+    var card = document.createElement("div");
+    card.className = "card";
+    card.style.cssText = "cursor:pointer;text-align:center;padding:12px 8px;";
+    card.innerHTML = '<div style="width:32px;height:32px;border-radius:7px;background:#f3f0ff;color:#7c3aed;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:10px;margin:0 auto 7px;">' + s.i + '</div>' +
+      '<div style="font-size:12px;font-weight:700;margin-bottom:6px;">' + s.n + '</div>' +
+      '<div style="display:flex;flex-direction:column;gap:4px;">' +
+      [["CXCPastPaper", links[0]], ["PastPapers.org", links[1]], ["StudyBank", links[2]]].map(function(src) {
+        return '<a href="' + src[1] + '" target="_blank" style="background:#7c3aed;color:#fff;border-radius:5px;padding:3px 0;font-size:10px;font-weight:700;text-decoration:none;display:block;">' + src[0] + ' &#8599;</a>';
+      }).join("") + '</div>';
+    capeGrid.appendChild(card);
+  });
+}
+
 // Init auth on load
 initFirebase();
 
@@ -1374,6 +1511,13 @@ function hidePaywall() {
   pw.style.transition = 'opacity 0.4s';
   setTimeout(function() { pw.style.display = 'none'; }, 400);
   document.body.style.overflow = '';
+}
+
+function showMMG() {
+  var info = document.getElementById('mmg-info');
+  if (info) {
+    info.style.display = info.style.display === 'block' ? 'none' : 'block';
+  }
 }
 
 function goToPayPal() {
@@ -1493,6 +1637,11 @@ saveQuizResult = function(subject, score, total, level) {
 
 // Run access check immediately
 checkAccess();
+var mmgBtn = document.getElementById('mmg-toggle');
+if(mmgBtn){mmgBtn.addEventListener('click',function(){
+  var info=document.getElementById('mmg-info');
+  if(info)info.style.display=info.style.display==='block'?'none':'block';
+});}
 
 
 </script>
